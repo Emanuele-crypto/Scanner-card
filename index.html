@@ -486,9 +486,20 @@ async function handleCardScan(input){
       });
       const result=await resp.json();
       if(result.error)throw new Error(result.error);
-      const parsed=result.data;
-      const map={name:'l-name',company:'l-company',role:'l-role',email:'l-email',phone:'l-phone',addr1:'l-addr1',zip:'l-zip',city:'l-city',country:'l-country'};
-      Object.entries(map).forEach(([k,id])=>{if(parsed[k])document.getElementById(id).value=parsed[k];});
+      const p=result.data;
+      if(!p)throw new Error('Nessun dato ricevuto');
+      const nome=(p.nome||p.name||'').trim();
+      const cognome=(p.cognome||'').trim();
+      const fullName=cognome?nome+' '+cognome:nome;
+      if(fullName)document.getElementById('l-name').value=fullName.trim();
+      if(p.azienda||p.company)document.getElementById('l-company').value=p.azienda||p.company||'';
+      if(p.ruolo||p.role)document.getElementById('l-role').value=p.ruolo||p.role||'';
+      if(p.email)document.getElementById('l-email').value=p.email;
+      if(p.telefono||p.mobile||p.phone)document.getElementById('l-phone').value=p.telefono||p.mobile||p.phone||'';
+      if(p.indirizzo||p.addr1)document.getElementById('l-addr1').value=p.indirizzo||p.addr1||'';
+      if(p.zip)document.getElementById('l-zip').value=p.zip;
+      if(p.city)document.getElementById('l-city').value=p.city;
+      if(p.country)document.getElementById('l-country').value=p.country;
     }catch(e){alert('Errore lettura biglietto: '+e.message+'\nInserisci manualmente.');}
     finally{document.getElementById('ai-loading').style.display='none';}
   };
