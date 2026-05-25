@@ -6,23 +6,18 @@
 <title>Card Scanner</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
-:root {
-  --bg:#0e0e0e;--surface:#161616;--surface2:#1f1f1f;--border:#2a2a2a;
-  --accent:#e8ff47;--accent2:#47c8ff;--text:#e8e8e8;--dim:#888;
-  --danger:#ff4747;--success:#47ff8e;--warn:#ffb347;
-  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
-}
+:root{--bg:#0e0e0e;--surface:#161616;--surface2:#1f1f1f;--border:#2a2a2a;--accent:#e8ff47;--accent2:#47c8ff;--text:#e8e8e8;--dim:#888;--danger:#ff4747;--success:#47ff8e;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;padding:24px;}
 header{display:flex;align-items:baseline;gap:16px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:18px;}
 header h1{font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--accent);}
 header span{font-family:var(--mono);font-size:0.7rem;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;}
 .box{max-width:1100px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:20px;overflow:hidden;}
-.box-head{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;}
+.box-head{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface2);}
 .box-body{padding:20px;}
-label.lbl{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px;}
+.lbl{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px;}
 .irow{display:flex;gap:8px;align-items:center;}
-.irow input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--mono);font-size:0.78rem;padding:9px 12px;outline:none;transition:border-color 0.15s;}
+.irow input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--mono);font-size:0.78rem;padding:9px 12px;outline:none;}
 .irow input:focus{border-color:var(--accent);}
 .note{font-size:0.71rem;color:var(--dim);margin-top:7px;line-height:1.6;}
 .layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1100px;}
@@ -30,7 +25,7 @@ label.lbl{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-tr
 .panel{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .phead{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;}
 .pbody{padding:20px;}
-#dz{border:2px dashed var(--border);border-radius:4px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:border-color 0.2s,background 0.2s;position:relative;overflow:hidden;}
+#dz{border:2px dashed var(--border);border-radius:4px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:border-color 0.2s;position:relative;overflow:hidden;}
 #dz:hover,#dz.over{border-color:var(--accent);background:rgba(232,255,71,0.04);}
 #dz .ico{font-size:2.4rem;opacity:0.35;}
 #dz p{font-family:var(--mono);font-size:0.77rem;color:var(--dim);text-align:center;}
@@ -48,7 +43,7 @@ button{font-family:var(--mono);font-size:0.77rem;letter-spacing:0.05em;padding:9
 .bs:hover{background:rgba(71,255,142,0.08);}
 .bs:disabled{opacity:0.3;cursor:not-allowed;}
 #st{font-family:var(--mono);font-size:0.72rem;color:var(--dim);margin-top:14px;min-height:18px;display:flex;align-items:center;gap:8px;}
-#st.loading{color:var(--accent2);}#st.error{color:var(--danger);}#st.ok{color:var(--success);}
+#st.error{color:var(--danger);}#st.ok{color:var(--success);}#st.loading{color:var(--accent2);}
 .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
 .spin{width:12px;height:12px;border:2px solid rgba(71,200,255,0.3);border-top-color:var(--accent2);border-radius:50%;animation:sp 0.7s linear infinite;flex-shrink:0;}
 @keyframes sp{to{transform:rotate(360deg);}}
@@ -57,7 +52,7 @@ button{font-family:var(--mono);font-size:0.77rem;letter-spacing:0.05em;padding:9
 .field input,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--sans);font-size:0.87rem;padding:9px 12px;outline:none;transition:border-color 0.15s;}
 .field input:focus,.field textarea:focus{border-color:var(--accent);}
 .field textarea{resize:vertical;min-height:58px;}
-.field input.ok{border-color:rgba(232,255,71,0.3);background:rgba(232,255,71,0.03);}
+.field input.hit{border-color:rgba(232,255,71,0.3);background:rgba(232,255,71,0.03);}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 #cp{grid-column:1/-1;}
 #cl{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;}
@@ -80,12 +75,12 @@ button{font-family:var(--mono);font-size:0.77rem;letter-spacing:0.05em;padding:9
 <div class="box">
   <div class="box-head">Configurazione</div>
   <div class="box-body">
-    <label class="lbl">Google Apps Script URL</label>
+    <span class="lbl">Google Apps Script URL</span>
     <div class="irow">
       <input type="text" id="surl" placeholder="https://script.google.com/macros/s/.../exec">
       <button class="bg" onclick="saveURL()">Salva</button>
     </div>
-    <div class="note">Incolla qui l'URL che finisce con /exec — viene salvato nel browser.</div>
+    <div class="note">Incolla l'URL che finisce con /exec — viene salvato nel browser.</div>
   </div>
 </div>
 
@@ -128,7 +123,7 @@ button{font-family:var(--mono);font-size:0.77rem;letter-spacing:0.05em;padding:9
       <div class="field"><label>Indirizzo</label><textarea id="f8"></textarea></div>
       <div class="field"><label>Note</label><textarea id="f9"></textarea></div>
       <div class="brow">
-        <button class="bs" id="btnSave" onclick="save()" disabled>✦ Salva su Sheets</button>
+        <button class="bs" id="btnSave" onclick="saveContact()" disabled>✦ Salva su Sheets</button>
         <button class="bg" onclick="clearForm()">Cancella</button>
       </div>
     </div>
@@ -169,7 +164,7 @@ function saveURL() {
   loadContacts();
 }
 
-function getURL() { return localStorage.getItem('cs_url'); }
+function getURL() { return localStorage.getItem('cs_url') || ''; }
 
 function drop(e) {
   e.preventDefault();
@@ -181,8 +176,8 @@ function drop(e) {
 function loadFile(f) {
   if (!f) return;
   var r = new FileReader();
-  r.onload = function(e) {
-    b64 = e.target.result;
+  r.onload = function(ev) {
+    b64 = ev.target.result;
     var dz = document.getElementById('dz');
     var img = dz.querySelector('img');
     if (!img) { img = document.createElement('img'); dz.appendChild(img); }
@@ -205,7 +200,7 @@ function clearImg() {
 
 async function scan() {
   var url = getURL();
-  if (!url) { st('error','Inserisci e salva lo Script URL prima'); return; }
+  if (!url) { st('error','Inserisci e salva lo Script URL'); return; }
   if (!b64)  { st('error','Nessuna immagine'); return; }
 
   document.getElementById('btnScan').disabled = true;
@@ -215,19 +210,22 @@ async function scan() {
   var mime  = parts[0].match(/:(.*?);/)[1];
   var data  = parts[1];
 
-  try {
-    var res = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({ action: 'ocr', imageBase64: data, mimeType: mime })
-    });
+  // Usa GET con parametri — evita CORS
+  var params = new URLSearchParams({
+    action: 'ocr',
+    mimeType: mime,
+    imageBase64: data
+  });
 
+  try {
+    var res = await fetch(url + '?' + params.toString());
     var text = await res.text();
     var json;
     try { json = JSON.parse(text); }
     catch(e) { throw new Error('Risposta non valida: ' + text.substring(0,100)); }
 
     if (json.error) throw new Error(json.error);
-    if (!json.ok || !json.data) throw new Error('Dati mancanti nella risposta');
+    if (!json.data)  throw new Error('Dati mancanti nella risposta');
 
     fillForm(json.data);
     st('ok','Dati estratti — verifica e salva');
@@ -245,46 +243,40 @@ function fillForm(d) {
   KEYS.forEach(function(k, i) {
     var el = document.getElementById(ids[i]);
     el.value = d[k] || '';
-    el.classList.toggle('ok', !!d[k]);
+    el.classList.toggle('hit', !!d[k]);
   });
 }
 
 function clearForm() {
-  var ids = ['f0','f1','f2','f3','f4','f5','f6','f7','f8','f9'];
-  ids.forEach(function(id) {
+  ['f0','f1','f2','f3','f4','f5','f6','f7','f8','f9'].forEach(function(id) {
     var el = document.getElementById(id);
     el.value = '';
-    el.classList.remove('ok');
+    el.classList.remove('hit');
   });
   document.getElementById('btnSave').disabled = true;
 }
 
-async function save() {
+async function saveContact() {
   var url = getURL();
   if (!url) { st('error','Script URL mancante'); return; }
 
   var ids = ['f0','f1','f2','f3','f4','f5','f6','f7','f8','f9'];
-  var contact = { timestamp: new Date().toLocaleString('it-IT') };
+  var params = new URLSearchParams({ action: 'save', timestamp: new Date().toLocaleString('it-IT') });
   KEYS.forEach(function(k, i) {
-    contact[k] = document.getElementById(ids[i]).value.trim();
+    params.append(k, document.getElementById(ids[i]).value.trim());
   });
 
   document.getElementById('btnSave').disabled = true;
   st('loading','Salvataggio...', true);
 
   try {
-    var res = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(contact)
-    });
+    var res = await fetch(url + '?' + params.toString());
     var text = await res.text();
     var json;
     try { json = JSON.parse(text); }
     catch(e) { throw new Error('Risposta non valida'); }
-
-    if (!json.ok) throw new Error('Errore dal server');
-
-    st('ok', '"' + contact.nome + ' ' + contact.cognome + '" salvato');
+    if (!json.saved) throw new Error('Errore dal server');
+    st('ok', 'Contatto salvato');
     clearForm();
     clearImg();
     loadContacts();
@@ -299,15 +291,15 @@ async function loadContacts() {
   if (!url) return;
   document.getElementById('cl').innerHTML = '<div class="empty">Caricamento...</div>';
   try {
-    var res  = await fetch(url);
+    var res  = await fetch(url + '?action=list');
     var text = await res.text();
     var json;
     try { json = JSON.parse(text); }
-    catch(e) { throw new Error('Risposta non valida: ' + text.substring(0,80)); }
-    contacts = json.rows || json.righe || [];
+    catch(e) { throw new Error('Risposta non valida'); }
+    contacts = json.rows || [];
     render();
   } catch(e) {
-    document.getElementById('cl').innerHTML = '<div class="empty" style="color:var(--danger)">Errore: ' + e.message + '</div>';
+    document.getElementById('cl').innerHTML = '<div class="empty" style="color:var(--danger)">Errore: '+e.message+'</div>';
   }
 }
 
@@ -316,17 +308,17 @@ function render() {
   document.getElementById('cnt').textContent = contacts.length;
   if (!contacts.length) { el.innerHTML = '<div class="empty">Nessun contatto</div>'; return; }
   el.innerHTML = contacts.slice().reverse().map(function(c) {
-    return '<div class="cc">' +
-      '<div class="dt">' + (c.data||'') + '</div>' +
-      '<div class="cn">' + (c.nome||'') + ' ' + (c.cognome||'') + '</div>' +
-      '<div class="co">' + (c.azienda||'—') + '</div>' +
-      '<div class="cd">' +
-        (c.ruolo    ? '<span>📋 '+c.ruolo+'</span>' : '') +
-        (c.email    ? '<span>✉ '+c.email+'</span>' : '') +
-        (c.telefono ? '<span>☎ '+c.telefono+'</span>' : '') +
-        (c.mobile   ? '<span>📱 '+c.mobile+'</span>' : '') +
-        (c.web      ? '<span>🌐 '+c.web+'</span>' : '') +
-        (c.indirizzo? '<span>📍 '+String(c.indirizzo).replace(/\n/g,' ')+'</span>' : '') +
+    return '<div class="cc">'+
+      '<div class="dt">'+(c.data||'')+'</div>'+
+      '<div class="cn">'+(c.nome||'')+' '+(c.cognome||'')+'</div>'+
+      '<div class="co">'+(c.azienda||'—')+'</div>'+
+      '<div class="cd">'+
+        (c.ruolo?'<span>📋 '+c.ruolo+'</span>':'')+
+        (c.email?'<span>✉ '+c.email+'</span>':'')+
+        (c.telefono?'<span>☎ '+c.telefono+'</span>':'')+
+        (c.mobile?'<span>📱 '+c.mobile+'</span>':'')+
+        (c.web?'<span>🌐 '+c.web+'</span>':'')+
+        (c.indirizzo?'<span>📍 '+String(c.indirizzo).replace(/\n/g,' ')+'</span>':'')+
       '</div></div>';
   }).join('');
 }
@@ -334,7 +326,7 @@ function render() {
 function st(type, msg, spin) {
   var el = document.getElementById('st');
   el.className = type;
-  if (spin) { el.innerHTML = '<div class="spin"></div>' + msg; return; }
+  if (spin) { el.innerHTML = '<div class="spin"></div>'+msg; return; }
   var col = type==='ok'?'var(--success)':type==='error'?'var(--danger)':type==='loading'?'var(--accent2)':'var(--dim)';
   el.innerHTML = msg ? '<div class="dot" style="background:'+col+'"></div>'+msg : '';
 }
@@ -352,32 +344,30 @@ function expCSV() {
     return ['data','nome','cognome','azienda','ruolo','email','telefono','mobile','web','indirizzo','note']
       .map(function(k){ return '"'+String(c[k]||'').replace(/"/g,'""')+'"'; }).join(';');
   });
-  dl([h.join(';')].concat(rows).join('\r\n'), 'contatti.csv', 'text/csv;charset=utf-8');
+  dl([h.join(';')].concat(rows).join('\r\n'),'contatti.csv','text/csv;charset=utf-8');
 }
 
 function expVCF() {
   if (!contacts.length) return;
   var out = contacts.map(function(c) {
-    var l = ['BEGIN:VCARD','VERSION:3.0',
-      'N:'+(c.cognome||'')+';'+(c.nome||'')+';;;',
-      'FN:'+(c.nome||'')+' '+(c.cognome||'')];
-    if(c.azienda)   l.push('ORG:'+c.azienda);
-    if(c.ruolo)     l.push('TITLE:'+c.ruolo);
-    if(c.email)     l.push('EMAIL;TYPE=WORK:'+c.email);
-    if(c.telefono)  l.push('TEL;TYPE=WORK,VOICE:'+c.telefono);
-    if(c.mobile)    l.push('TEL;TYPE=CELL:'+c.mobile);
-    if(c.web)       l.push('URL:'+c.web);
-    if(c.indirizzo) l.push('ADR;TYPE=WORK:;;'+String(c.indirizzo).replace(/\n/g,', ')+';;;;');
-    if(c.note)      l.push('NOTE:'+c.note);
+    var l=['BEGIN:VCARD','VERSION:3.0','N:'+(c.cognome||'')+';'+(c.nome||'')+';;;','FN:'+(c.nome||'')+' '+(c.cognome||'')];
+    if(c.azienda)l.push('ORG:'+c.azienda);
+    if(c.ruolo)l.push('TITLE:'+c.ruolo);
+    if(c.email)l.push('EMAIL;TYPE=WORK:'+c.email);
+    if(c.telefono)l.push('TEL;TYPE=WORK,VOICE:'+c.telefono);
+    if(c.mobile)l.push('TEL;TYPE=CELL:'+c.mobile);
+    if(c.web)l.push('URL:'+c.web);
+    if(c.indirizzo)l.push('ADR;TYPE=WORK:;;'+String(c.indirizzo).replace(/\n/g,', ')+';;;;');
+    if(c.note)l.push('NOTE:'+c.note);
     l.push('END:VCARD');
     return l.join('\r\n');
   }).join('\r\n\r\n');
-  dl(out, 'contatti.vcf', 'text/vcard');
+  dl(out,'contatti.vcf','text/vcard');
 }
 
 function expJSON() {
   if (!contacts.length) return;
-  dl(JSON.stringify(contacts,null,2), 'contatti.json', 'application/json');
+  dl(JSON.stringify(contacts,null,2),'contatti.json','application/json');
 }
 </script>
 </body>
