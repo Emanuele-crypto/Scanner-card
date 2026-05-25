@@ -767,7 +767,11 @@ const SHEETS_URL='https://script.google.com/macros/s/AKfycbxGvZyzb_gKZasEOQJu2mP
 
 async function saveToSheets(lead){
   try{
-    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)});
+    const payload=Object.assign({},lead);
+    payload.samples=lead.samples&&lead.samples.length
+      ? lead.samples.map(s=>s.product+' ('+s.qty+')').join(' | ')
+      : '';
+    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
   }catch(e){console.warn('Sheets sync fallito:',e);}
 }
 
