@@ -545,7 +545,7 @@ function addLead(){
   document.getElementById('card-input').value='';
   newLeadSamples=[];renderNewLeadSamples();
   renderLeads();updateStats();saveData();
-  saveToSheets(data.leads[0]);
+  saveToSheets(data.leads[data.leads.length-1]);
 }
 
 function addSampleToLead(leadId){
