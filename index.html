@@ -172,6 +172,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <button class="tab" onclick="switchTab('notes')"><i class="ti ti-notes"></i>Note</button>
   <button class="tab" onclick="switchTab('email')"><i class="ti ti-mail"></i>Email</button>
   <button class="tab" onclick="switchTab('bulk')"><i class="ti ti-send"></i>Invio</button>
+  <button class="tab" onclick="switchTab('drive')"><i class="ti ti-brand-google-drive"></i>Drive</button>
 </nav>
 
 <main class="main">
@@ -326,6 +327,19 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div id="bulk-result"></div>
 </div>
 
+<div class="section" id="section-drive">
+  <div class="form-block">
+    <p class="form-title"><i class="ti ti-brand-google-drive"></i> Contatti su Google Sheets — in tempo reale</p>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:12px">Tutti i contatti salvati da qualsiasi dispositivo. Si aggiorna ad ogni apertura della tab.</p>
+    <div class="btn-row" style="justify-content:flex-start;margin-top:0">
+      <button class="btn btn-primary btn-sm" onclick="loadFromSheets()"><i class="ti ti-refresh"></i> Aggiorna</button>
+      <a class="btn btn-sm" href="https://docs.google.com/spreadsheets/d/18jODNrtSlR3JzjsXDvIwGfkgh7j1-obYvsoqH5xNUsk/edit" target="_blank"><i class="ti ti-external-link"></i> Apri foglio</a>
+    </div>
+  </div>
+  <div id="drive-loading" class="ai-banner" style="display:none"><div class="spinner"></div> Caricamento da Google Sheets…</div>
+  <div id="drive-list"><div class="empty"><i class="ti ti-brand-google-drive"></i>Premi Aggiorna per caricare i contatti.</div></div>
+</div>
+
 </main>
 
 <div id="contact-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);overflow-y:auto">
@@ -348,13 +362,14 @@ let newLeadSamples=[];
 let calYear,calMonth;
 
 function switchTab(name){
-  const names=['leads','appts','allsamples','calendar','notes','email','bulk'];
+  const names=['leads','appts','allsamples','calendar','notes','email','bulk','drive'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));
   document.querySelectorAll('.section').forEach((s,i)=>s.classList.toggle('active',names[i]===name));
   if(name==='allsamples')renderAllSamples();
   if(name==='calendar'){renderCalendar();renderFuList();}
   if(name==='email')refreshContactSelect();
   if(name==='bulk')renderBulkContacts();
+  if(name==='drive')loadFromSheets();
 }
 
 function updateStats(){
@@ -753,6 +768,40 @@ async function saveToSheets(lead){
   try{
     await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)});
   }catch(e){console.warn('Sheets sync fallito:',e);}
+}
+
+async function loadFromSheets(){
+  const loading=document.getElementById('drive-loading');
+  const list=document.getElementById('drive-list');
+  loading.style.display='flex';
+  list.innerHTML='';
+  try{
+    const res=await fetch(SHEETS_URL+'?t='+Date.now());
+    const json=await res.json();
+    loading.style.display='none';
+    if(!json.ok||!json.contacts||!json.contacts.length){
+      list.innerHTML='<div class="empty"><i class="ti ti-inbox"></i>Nessun contatto ancora sul foglio.</div>';
+      return;
+    }
+    list.innerHTML=json.contacts.map(c=>`
+      <div class="card" style="margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--teal-bg);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">${(c.name||'?').split(' ').slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('')}</div>
+          <div>
+            <div style="font-weight:700;font-size:14px">${c.name||'—'}</div>
+            <div style="font-size:12px;color:var(--text2)">${c.company||''}${c.role?' · '+c.role:''}</div>
+          </div>
+          <div style="margin-left:auto;font-size:11px;color:var(--text3)">${c.dataInserimento||''}</div>
+        </div>
+        ${c.email?`<div style="font-size:12px;color:var(--text2)"><i class="ti ti-mail" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>${c.email}</div>`:''}
+        ${c.phone?`<div style="font-size:12px;color:var(--text2)"><i class="ti ti-phone" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>${c.phone}</div>`:''}
+        ${c.piva?`<div style="font-size:11px;color:var(--text3);margin-top:4px">P.IVA: ${c.piva}${c.sdi?' · SDI: '+c.sdi:''}</div>`:''}
+      </div>`).join('');
+  }catch(e){
+    loading.style.display='none';
+    list.innerHTML='<div class="empty"><i class="ti ti-alert-circle"></i>Errore di rete. Controlla la connessione.</div>';
+    console.warn('loadFromSheets error:',e);
+  }
 }
 
 // ── STORAGE ──
