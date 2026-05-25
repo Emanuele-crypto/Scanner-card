@@ -113,8 +113,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 .empty{text-align:center;padding:2.5rem 1rem;color:var(--text3);font-size:13px}
 .empty i{font-size:32px;display:block;margin-bottom:8px}
 .samples-card{background:var(--surface);border:0.5px solid var(--border);border-left:3px solid var(--teal);border-radius:0 var(--rl) var(--rl) 0;padding:1rem;margin-bottom:8px}
-
-/* ── CALENDARIO ── */
 .cal-wrap{margin-bottom:1rem}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0;margin-bottom:6px}
 .cal-title{font-size:15px;font-weight:700;color:var(--text);letter-spacing:.02em}
@@ -134,8 +132,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 .cal-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--text2);margin-bottom:10px}
 .cal-legend span{display:flex;align-items:center;gap:4px}
 .cal-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
-
-/* Follow-up list */
 .fu-list{margin-top:1rem}
 .fu-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--border)}
 .fu-date-col{min-width:76px}
@@ -146,8 +142,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 .fu-name{font-size:13px;font-weight:700;color:var(--text);margin:0}
 .fu-company{font-size:11px;color:var(--text2);margin:0}
 .fu-source{font-size:11px;color:var(--text3);font-style:italic}
-
-/* Bulk email */
 .bulk-contact-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border)}
 .bulk-contact-row:last-child{border-bottom:none}
 .bulk-info{flex:1}
@@ -182,7 +176,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 
 <main class="main">
 
-<!-- LEADS -->
 <div class="section active" id="section-leads">
   <div class="form-block">
     <p class="form-title"><i class="ti ti-id"></i> Scansiona biglietto da visita</p>
@@ -209,7 +202,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
       <div class="field"><label>Priorità</label><select id="l-priority"><option value="media">Media</option><option value="alta">Alta</option><option value="bassa">Bassa</option></select></div>
     </div>
     <div class="field"><label>Interesse</label><select id="l-interest"><option value="">— seleziona —</option><option>Acquisto diretto</option><option>Partnership/distribuzione</option><option>Informazioni generali</option><option>Campioni gratuiti</option></select></div>
-    <div class="field"><label>Note contatto</label><textarea id="l-notes" placeholder="Commenti, impressioni, accordi verbali, argomenti discussi…"></textarea></div>
+    <div class="field"><label>Note contatto</label><textarea id="l-notes" placeholder="Commenti, impressioni, accordi verbali…"></textarea></div>
     <hr class="divider">
     <p class="form-title"><i class="ti ti-map-pin"></i> Indirizzo di spedizione</p>
     <div class="field"><label>Via e numero</label><input id="l-addr1" type="text" placeholder="12 Rue du Faubourg Saint-Honoré"></div>
@@ -234,7 +227,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div id="leads-list"><div class="empty"><i class="ti ti-users"></i>Nessun contatto ancora.</div></div>
 </div>
 
-<!-- AGENDA -->
 <div class="section" id="section-appts">
   <div class="form-block">
     <p class="form-title"><i class="ti ti-calendar-plus"></i> Nuovo appuntamento</p>
@@ -256,7 +248,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div id="appts-list"><div class="empty"><i class="ti ti-calendar"></i>Nessun appuntamento ancora.</div></div>
 </div>
 
-<!-- CAMPIONI -->
 <div class="section" id="section-allsamples">
   <div class="form-block" id="samples-actions" style="display:none">
     <p class="form-title"><i class="ti ti-package"></i> Riepilogo per il responsabile</p>
@@ -269,7 +260,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div id="allsamples-list"><div class="empty"><i class="ti ti-flask"></i>Nessun campione ancora.</div></div>
 </div>
 
-<!-- CALENDARIO -->
 <div class="section" id="section-calendar">
   <div class="form-block">
     <div class="cal-legend">
@@ -290,7 +280,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div class="fu-list" id="fu-list"></div>
 </div>
 
-<!-- NOTE -->
 <div class="section" id="section-notes">
   <div class="form-block">
     <p class="form-title"><i class="ti ti-pencil"></i> Nuova nota</p>
@@ -307,7 +296,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div id="notes-list"><div class="empty"><i class="ti ti-notes"></i>Nessuna nota ancora.</div></div>
 </div>
 
-<!-- EMAIL SINGOLA -->
 <div class="section" id="section-email">
   <div class="form-block">
     <p class="form-title"><i class="ti ti-mail"></i> Genera email di follow-up singola</p>
@@ -320,16 +308,12 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   <div id="email-result"></div>
 </div>
 
-<!-- INVIO MASSA -->
 <div class="section" id="section-bulk">
   <div class="form-block">
     <p class="form-title"><i class="ti ti-send"></i> Email di riepilogo a tutti i contatti</p>
-    <div class="field"><label>Oggetto email *</label><input id="bulk-subject" type="text" placeholder="es. Grazie per l'incontro al SIMPPAR 2026" value="Grazie per l'incontro al SIMPPAR 2026 — Grasse"></div>
-    <div class="field">
-      <label>Testo email *</label>
-      <textarea id="bulk-body" style="min-height:180px" placeholder="Inserisci qui il testo della tua email di riepilogo…&#10;&#10;Puoi usare {nome} per il nome del contatto e {azienda} per l'azienda — verranno sostituiti automaticamente."></textarea>
-    </div>
-    <div style="font-size:11px;color:var(--text3);margin-bottom:10px"><i class="ti ti-info-circle" style="font-size:13px;vertical-align:-2px;margin-right:3px"></i>Usa <strong>{nome}</strong> e <strong>{azienda}</strong> come segnaposto — verranno sostituiti per ogni contatto.</div>
+    <div class="field"><label>Oggetto email *</label><input id="bulk-subject" type="text" value="Grazie per l'incontro al SIMPPAR 2026 — Grasse"></div>
+    <div class="field"><label>Testo email *</label><textarea id="bulk-body" style="min-height:180px" placeholder="Usa {nome} e {azienda} come segnaposto."></textarea></div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:10px"><i class="ti ti-info-circle" style="font-size:13px;vertical-align:-2px;margin-right:3px"></i>Usa <strong>{nome}</strong> e <strong>{azienda}</strong> come segnaposto.</div>
     <div class="btn-row">
       <button class="btn btn-info btn-sm" onclick="previewBulk()"><i class="ti ti-eye"></i> Anteprima</button>
       <button class="btn btn-primary" onclick="generateBulkLinks()"><i class="ti ti-list-check"></i> Genera link per tutti</button>
@@ -344,7 +328,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 
 </main>
 
-<!-- CONTACT MODAL -->
 <div id="contact-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);overflow-y:auto">
   <div style="background:var(--surface);border-radius:var(--rl);margin:1rem auto;max-width:600px;padding:1.25rem;position:relative">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
@@ -355,7 +338,6 @@ body{background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
   </div>
 </div>
 
-<!-- PRINT FRAME -->
 <iframe id="print-frame" style="display:none"></iframe>
 
 <script>
@@ -393,7 +375,26 @@ function formatDate(str){if(!str)return '';const d=new Date(str+'T00:00:00');ret
 function formatDateLong(str){if(!str)return '';const d=new Date(str+'T00:00:00');return d.toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});}
 function todayStr(){return new Date().toISOString().split('T')[0];}
 
-/* ── CALENDAR ── */
+// ── EXPORT CSV (NUOVO) ──
+function exportCSV(){
+  if(!data.leads.length){alert('Nessun contatto da esportare.');return;}
+  const headers=['Nome','Azienda','Ruolo','Email','Telefono','Priorità','Interesse','Note','Via','CAP','Città','Paese','Nota spedizione','Campioni','Follow-up','Data inserimento'];
+  const rows=data.leads.map(function(l){
+    var samples=l.samples&&l.samples.length?l.samples.map(function(s){return s.product+' ('+s.qty+')';}).join(' | '):'';
+    var row=[l.name,l.company,l.role,l.email,l.phone,l.priority,l.interest,l.notes,l.addr1,l.zip,l.city,l.country,l.addrnote,samples,l.followup||'',new Date(l.id).toLocaleDateString('it-IT')];
+    return row.map(function(v){return '"'+String(v||'').replace(/"/g,'""')+'"';}).join(';');
+  });
+  var bom='\uFEFF';
+  var csv=bom+[headers.join(';')].concat(rows).join('\r\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='simppar_contatti_'+new Date().toISOString().split('T')[0]+'.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── CALENDAR ──
 function initCal(){const now=new Date();calYear=now.getFullYear();calMonth=now.getMonth();}
 function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();renderFuList();}
 function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();renderFuList();}
@@ -423,26 +424,16 @@ function renderCalendar(){
   const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
   const daysInPrev=new Date(calYear,calMonth,0).getDate();
   let cells=[];
-  for(let i=startDow-1;i>=0;i--){
-    const d=daysInPrev-i;
-    cells.push({day:d,month:calMonth-1,year:calYear,other:true});
-  }
+  for(let i=startDow-1;i>=0;i--){cells.push({day:daysInPrev-i,month:calMonth-1,year:calYear,other:true});}
   for(let d=1;d<=daysInMonth;d++)cells.push({day:d,month:calMonth,year:calYear,other:false});
-  while(cells.length%7!==0){
-    const extra=cells.length-daysInMonth-startDow+1;
-    cells.push({day:extra,month:calMonth+1,year:calYear,other:true});
-  }
+  while(cells.length%7!==0){const extra=cells.length-daysInMonth-startDow+1;cells.push({day:extra,month:calMonth+1,year:calYear,other:true});}
   const gridEl=document.getElementById('cal-grid');
   gridEl.innerHTML=cells.map(c=>{
     const y=c.month===12?c.year+1:c.month===-1?c.year-1:c.year;
     const m=((c.month%12)+12)%12;
     const ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(c.day).padStart(2,'0');
     const dots=(evs[ds]||[]).map(t=>`<div class="cal-dot d-${t}"></div>`).join('');
-    const isToday=ds===today;
-    return `<div class="cal-day${c.other?' other-month':''}${isToday?' today':''}">
-      <div class="cal-day-num">${c.day}</div>
-      ${dots?`<div class="cal-dots">${dots}</div>`:''}
-    </div>`;
+    return `<div class="cal-day${c.other?' other-month':''}${ds===today?' today':''}"><div class="cal-day-num">${c.day}</div>${dots?`<div class="cal-dots">${dots}</div>`:''}</div>`;
   }).join('');
 }
 
@@ -459,18 +450,11 @@ function renderFuList(){
       let cls='';
       if(item.date<today)cls=' past';
       else if(item.date===today)cls=' today2';
-      return `<div class="fu-row">
-        <div class="fu-date-col"><span class="fu-date${cls}">${formatDate(item.date)}</span></div>
-        <div class="fu-info">
-          <p class="fu-name">${item.name}</p>
-          ${item.company?`<p class="fu-company">${item.company}</p>`:''}
-          <span class="fu-source">${item.source}</span>
-        </div>
-      </div>`;
+      return `<div class="fu-row"><div class="fu-date-col"><span class="fu-date${cls}">${formatDate(item.date)}</span></div><div class="fu-info"><p class="fu-name">${item.name}</p>${item.company?`<p class="fu-company">${item.company}</p>`:''}<span class="fu-source">${item.source}</span></div></div>`;
     }).join('');
 }
 
-/* ── SCAN ── */
+// ── SCAN ──
 async function handleCardScan(input){
   if(!input.files||!input.files[0])return;
   const file=input.files[0];
@@ -491,7 +475,7 @@ async function handleCardScan(input){
   reader.readAsDataURL(file);
 }
 
-/* ── LEADS ── */
+// ── LEADS ──
 function addNewLeadSample(){
   const p=document.getElementById('ns-product').value;if(!p)return;
   newLeadSamples.push({id:Date.now(),product:p,qty:document.getElementById('ns-qty').value});
@@ -513,21 +497,21 @@ function addLead(){
   document.getElementById('scan-preview').style.display='none';
   document.getElementById('card-input').value='';
   newLeadSamples=[];renderNewLeadSamples();
-  renderLeads();updateStats();
+  renderLeads();updateStats();saveData();
 }
 
 function addSampleToLead(leadId){
   const sel=document.getElementById('as-p-'+leadId);const p=sel.value;if(!p)return;
   const lead=data.leads.find(l=>l.id===leadId);if(!lead)return;
   lead.samples.push({id:Date.now(),product:p,qty:document.getElementById('as-q-'+leadId).value});
-  sel.value='';renderLeads();updateStats();
+  sel.value='';renderLeads();updateStats();saveData();
 }
 function removeSampleFromLead(leadId,sampleId){
   const lead=data.leads.find(l=>l.id===leadId);
   if(lead)lead.samples=lead.samples.filter(s=>s.id!==sampleId);
-  renderLeads();updateStats();
+  renderLeads();updateStats();saveData();
 }
-function deleteLead(id){if(!confirm('Eliminare?'))return;data.leads=data.leads.filter(l=>l.id!==id);renderLeads();updateStats();}
+function deleteLead(id){if(!confirm('Eliminare?'))return;data.leads=data.leads.filter(l=>l.id!==id);renderLeads();updateStats();saveData();}
 
 function renderLeads(){
   const el=document.getElementById('leads-list');
@@ -561,12 +545,12 @@ function renderAllSamples(){
   }).join('');
 }
 
-/* ── APPUNTAMENTI ── */
+// ── APPUNTAMENTI ──
 function addAppt(){
   const name=document.getElementById('a-name').value.trim();if(!name){alert('Inserisci il nome.');return;}
   data.appts.push({name,company:document.getElementById('a-company').value.trim(),day:document.getElementById('a-day').value,time:document.getElementById('a-time').value,type:document.getElementById('a-type').value,status:document.getElementById('a-status').value,notes:document.getElementById('a-notes').value.trim(),id:Date.now()});
   ['a-name','a-company','a-notes'].forEach(id=>document.getElementById(id).value='');
-  renderAppts();
+  renderAppts();saveData();
 }
 function renderAppts(){
   const el=document.getElementById('appts-list');
@@ -576,28 +560,28 @@ function renderAppts(){
   sorted.forEach(a=>{
     if(a.day!==lastDay){html+=`<div class="day-label"><i class="ti ti-calendar-event" style="font-size:12px;margin-right:4px"></i>${a.day}</div>`;lastDay=a.day;}
     const linkedLead=data.leads.find(l=>l.name.toLowerCase()===a.name.toLowerCase()||(l.company&&l.company.toLowerCase()===a.company.toLowerCase()));
-    const linkBtn=linkedLead?`<button class="btn btn-info btn-sm" onclick="openContactModal(${linkedLead.id})" title="Apri scheda contatto"><i class="ti ti-user"></i></button>`:`<button class="btn btn-sm" onclick="openNewContactFromAppt('${a.name.replace(/'/g,"\'")}','${(a.company||'').replace(/'/g,"\'")}' )" title="Crea contatto da appuntamento"><i class="ti ti-user-plus"></i></button>`;
+    const linkBtn=linkedLead?`<button class="btn btn-info btn-sm" onclick="openContactModal(${linkedLead.id})"><i class="ti ti-user"></i></button>`:`<button class="btn btn-sm" onclick="openNewContactFromAppt('${a.name.replace(/'/g,"\\'")}','${(a.company||'').replace(/'/g,"\\'")}')"><i class="ti ti-user-plus"></i></button>`;
     html+=`<div class="appt-row"><span class="appt-time">${a.time}</span><div class="appt-info"><p class="appt-name">${a.name}${a.company?' — '+a.company:''}</p><p class="appt-detail">${a.type}${a.notes?' · '+a.notes:''}</p></div><div style="display:flex;gap:5px;align-items:center">${statusBadge(a.status)}${linkBtn}<button class="btn btn-danger btn-sm" onclick="deleteAppt(${a.id})"><i class="ti ti-trash"></i></button></div></div>`;
   });
   el.innerHTML=html;
 }
-function deleteAppt(id){data.appts=data.appts.filter(a=>a.id!==id);renderAppts();}
+function deleteAppt(id){data.appts=data.appts.filter(a=>a.id!==id);renderAppts();saveData();}
 
-/* ── NOTE ── */
+// ── NOTE ──
 function addNote(){
   const text=document.getElementById('n-text').value.trim();if(!text){alert('Inserisci il testo.');return;}
   data.notes.push({text,person:document.getElementById('n-person').value.trim(),followup:document.getElementById('n-followup').value||followupDate7(),date:new Date().toLocaleDateString('it-IT'),id:Date.now()});
   ['n-person','n-text','n-followup'].forEach(id=>document.getElementById(id).value='');
-  renderNotes();updateStats();
+  renderNotes();updateStats();saveData();
 }
 function renderNotes(){
   const el=document.getElementById('notes-list');
   if(!data.notes.length){el.innerHTML='<div class="empty"><i class="ti ti-notes"></i>Nessuna nota ancora.</div>';return;}
   el.innerHTML=data.notes.map(n=>`<div class="note-card"><div class="note-top"><span class="note-person">${n.person||'Nota generale'}</span><div style="display:flex;gap:6px;align-items:center"><span class="note-date">${n.date}</span><button class="btn btn-danger btn-sm" onclick="deleteNote(${n.id})"><i class="ti ti-trash"></i></button></div></div><p class="note-body">${n.text}</p><span class="note-fu"><i class="ti ti-alarm" style="font-size:11px;margin-right:3px"></i>Follow-up: ${formatDateLong(n.followup)}</span></div>`).join('');
 }
-function deleteNote(id){data.notes=data.notes.filter(n=>n.id!==id);renderNotes();updateStats();}
+function deleteNote(id){data.notes=data.notes.filter(n=>n.id!==id);renderNotes();updateStats();saveData();}
 
-/* ── EMAIL SINGOLA ── */
+// ── EMAIL ──
 function refreshContactSelect(){
   const sel=document.getElementById('email-contact-select');
   const cur=sel.value;
@@ -614,20 +598,7 @@ async function generateEmail(){
   const addr=buildAddr(lead);
   const samplesText=lead.samples.length?lead.samples.map(s=>`- ${s.product} (${s.qty})`).join('\n'):'Nessun campione richiesto.';
   const firstName=lead.name.split(' ')[0];
-  const prompt=`Sei un esperto di relazioni commerciali nel settore degli oli essenziali e profumeria di Simone Gatto.
-Scrivi un'email di follow-up professionale in ${lang} seguendo ESATTAMENTE questa struttura:
-
-1. Saluto: "Buongiorno ${firstName},"
-2. Apertura: "è stato un piacere incontrarti nei giorni scorsi al SIMPPAR."
-3. Riepilogo campioni: "Come concordato, di seguito il riepilogo dei campioni che vi invieremo nei prossimi giorni:" seguito dalla lista:
-${samplesText}
-4. Conferma indirizzo: "Puoi confermare che l'indirizzo di spedizione sia corretto? ${addr||'(indirizzo da confermare)'}"
-${lead.addrnote?'   Nota spedizione: '+lead.addrnote:''}
-5. Disponibilità: "Rimaniamo a disposizione per qualsiasi ulteriore informazione${lead.notes?' — in particolare riguardo a: '+lead.notes:extra?' — '+extra:''}."
-6. Chiusura professionale e firma con "Simone Gatto | info@simonegatto.com"
-
-Adatta il tono alla lingua ${lang} mantenendo professionalità e calore. 
-Includi "Oggetto: " nella prima riga. Scrivi SOLO l'email, niente altro.`;
+  const prompt=`Sei un esperto di relazioni commerciali nel settore degli oli essenziali di Simone Gatto. Scrivi un'email di follow-up professionale in ${lang}:\n1. Saluto: "Buongiorno ${firstName},"\n2. Apertura: "è stato un piacere incontrarti nei giorni scorsi al SIMPPAR."\n3. Campioni:\n${samplesText}\n4. Conferma indirizzo: "${addr||'(da confermare)'}"\n5. Disponibilità${lead.notes?' riguardo a: '+lead.notes:extra?' — '+extra:''}.\n6. Chiusura con firma Simone Gatto | info@simonegatto.com\nIncludi "Oggetto: " nella prima riga. Scrivi SOLO l'email.`;
   document.getElementById('email-generating').style.display='flex';
   document.getElementById('email-result').innerHTML='';
   try{
@@ -646,26 +617,18 @@ Includi "Oggetto: " nella prima riga. Scrivi SOLO l'email, niente altro.`;
 function copyEmail(sE,bId){const b=document.getElementById(bId).innerText;const s=decodeURIComponent(sE);navigator.clipboard.writeText('Oggetto: '+s+'\n\n'+b).then(()=>alert('Copiata!')).catch(()=>alert('Seleziona e copia manualmente.'));}
 function openMailto(eE,sE,bId){const e=decodeURIComponent(eE);const s=decodeURIComponent(sE);const b=document.getElementById(bId).innerText;window.location.href='mailto:'+e+'?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(b);}
 
-/* ── BULK EMAIL ── */
-function renderBulkContacts(){
-  // noop — contacts rendered on generate
-}
-
-function buildBulkBody(lead,template){
-  return template.replace(/\{nome\}/gi,lead.name.split(' ')[0]).replace(/\{azienda\}/gi,lead.company);
-}
-
+// ── BULK ──
+function renderBulkContacts(){}
+function buildBulkBody(lead,template){return template.replace(/\{nome\}/gi,lead.name.split(' ')[0]).replace(/\{azienda\}/gi,lead.company);}
 function previewBulk(){
   const subject=document.getElementById('bulk-subject').value.trim();
   const bodyTpl=document.getElementById('bulk-body').value.trim();
   if(!subject||!bodyTpl){alert('Inserisci oggetto e testo.');return;}
   if(!data.leads.length){alert('Nessun contatto ancora.');return;}
   const lead=data.leads[0];
-  const body=buildBulkBody(lead,bodyTpl);
   document.getElementById('bulk-preview').style.display='block';
-  document.getElementById('bulk-preview-content').innerHTML=`<div style="font-size:12px;color:var(--text2);margin-bottom:6px"><strong>A:</strong> ${lead.name} — ${lead.email||'(email mancante)'}<br><strong>Oggetto:</strong> ${subject}</div><div class="preview-box">${body}</div>`;
+  document.getElementById('bulk-preview-content').innerHTML=`<div style="font-size:12px;color:var(--text2);margin-bottom:6px"><strong>A:</strong> ${lead.name} — ${lead.email||'(email mancante)'}<br><strong>Oggetto:</strong> ${subject}</div><div class="preview-box">${buildBulkBody(lead,bodyTpl)}</div>`;
 }
-
 function generateBulkLinks(){
   const subject=document.getElementById('bulk-subject').value.trim();
   const bodyTpl=document.getElementById('bulk-body').value.trim();
@@ -675,270 +638,111 @@ function generateBulkLinks(){
   const rows=data.leads.map(l=>{
     const body=buildBulkBody(l,bodyTpl);
     const href='mailto:'+encodeURIComponent(l.email||'')+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-    const hasEmail=!!l.email;
-    return `<div class="bulk-contact-row">
-      <div class="avatar" style="width:30px;height:30px;font-size:10px">${initials(l.name)}</div>
-      <div class="bulk-info"><p class="bulk-name">${l.name}</p><p class="bulk-email">${l.email||'<span style="color:var(--warn-text)">Email mancante</span>'}</p></div>
-      ${hasEmail?`<a href="${href}" class="btn btn-primary btn-sm" style="text-decoration:none;white-space:nowrap"><i class="ti ti-mail"></i> Apri</a>`:`<span class="badge b-warn">No email</span>`}
-    </div>`;
+    return `<div class="bulk-contact-row"><div class="avatar" style="width:30px;height:30px;font-size:10px">${initials(l.name)}</div><div class="bulk-info"><p class="bulk-name">${l.name}</p><p class="bulk-email">${l.email||'<span style="color:var(--warn-text)">Email mancante</span>'}</p></div>${l.email?`<a href="${href}" class="btn btn-primary btn-sm" style="text-decoration:none"><i class="ti ti-mail"></i> Apri</a>`:`<span class="badge b-warn">No email</span>`}</div>`;
   }).join('');
-  el.innerHTML=`<div class="form-block"><p class="form-title"><i class="ti ti-list-check"></i> ${data.leads.length} contatti — clicca per aprire ogni email</p>${rows}<div class="bulk-actions"><button class="btn btn-info btn-sm" onclick="copyAllEmails()"><i class="ti ti-copy"></i> Copia tutte le email</button></div></div>`;
+  el.innerHTML=`<div class="form-block"><p class="form-title"><i class="ti ti-list-check"></i> ${data.leads.length} contatti</p>${rows}<div class="bulk-actions"><button class="btn btn-info btn-sm" onclick="copyAllEmails()"><i class="ti ti-copy"></i> Copia tutte le email</button></div></div>`;
 }
-
 function copyAllEmails(){
   const emails=data.leads.filter(l=>l.email).map(l=>l.email).join(', ');
   if(!emails){alert('Nessun contatto ha un indirizzo email.');return;}
-  navigator.clipboard.writeText(emails).then(()=>alert('Indirizzi copiati:\n'+emails)).catch(()=>alert(emails));
+  navigator.clipboard.writeText(emails).then(()=>alert('Indirizzi copiati!')).catch(()=>alert(emails));
 }
 
-/* ── MODAL CONTATTO ── */
+// ── MODAL ──
 function openContactModal(leadId){
-  const lead=data.leads.find(l=>l.id===leadId);
-  if(!lead)return;
+  const lead=data.leads.find(l=>l.id===leadId);if(!lead)return;
   const addr=buildAddr(lead);
-  const modal=document.getElementById('contact-modal');
-  const mc=document.getElementById('modal-content');
-  mc.innerHTML=`
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-      <div class="avatar" style="width:44px;height:44px;font-size:14px">${initials(lead.name)}</div>
-      <div><p class="card-name">${lead.name}</p><p class="card-sub">${lead.role?lead.role+' — ':''}${lead.company}</p></div>
-    </div>
-    <div class="card-meta" style="margin-bottom:10px">
-      ${priorityBadge(lead.priority)}
-      ${lead.interest?`<span class="badge b-neutral">${lead.interest}</span>`:''}
-    </div>
+  document.getElementById('modal-content').innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="avatar" style="width:44px;height:44px;font-size:14px">${initials(lead.name)}</div><div><p class="card-name">${lead.name}</p><p class="card-sub">${lead.role?lead.role+' — ':''}${lead.company}</p></div></div>
     <div class="form-block" style="margin-bottom:10px">
-      <p class="form-title"><i class="ti ti-info-circle"></i> Dati principali</p>
-      <div class="field-row">
-        <div class="field"><label>Email</label><input type="email" value="${lead.email||''}" onchange="updateLeadField(${lead.id},'email',this.value)"></div>
-        <div class="field"><label>Telefono</label><input type="text" value="${lead.phone||''}" onchange="updateLeadField(${lead.id},'phone',this.value)"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Interesse</label>
-          <select onchange="updateLeadField(${lead.id},'interest',this.value)">
-            <option value="">— seleziona —</option>
-            ${['Acquisto diretto','Partnership/distribuzione','Informazioni generali','Campioni gratuiti'].map(o=>`<option${lead.interest===o?' selected':''}>${o}</option>`).join('')}
-          </select>
-        </div>
-        <div class="field"><label>Priorità</label>
-          <select onchange="updateLeadField(${lead.id},'priority',this.value)">
-            ${['alta','media','bassa'].map(o=>`<option value="${o}"${lead.priority===o?' selected':''}>${o.charAt(0).toUpperCase()+o.slice(1)}</option>`).join('')}
-          </select>
-        </div>
-      </div>
-      <div class="field"><label>Note contatto</label><textarea onchange="updateLeadField(${lead.id},'notes',this.value)">${lead.notes||''}</textarea></div>
-    </div>
-    <div class="form-block" style="margin-bottom:10px">
-      <p class="form-title"><i class="ti ti-map-pin"></i> Indirizzo spedizione</p>
-      <div class="field"><label>Via e numero</label><input type="text" value="${lead.addr1||''}" onchange="updateLeadField(${lead.id},'addr1',this.value)"></div>
-      <div class="field-row">
-        <div class="field"><label>CAP</label><input type="text" value="${lead.zip||''}" onchange="updateLeadField(${lead.id},'zip',this.value)"></div>
-        <div class="field"><label>Città</label><input type="text" value="${lead.city||''}" onchange="updateLeadField(${lead.id},'city',this.value)"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Paese</label><input type="text" value="${lead.country||''}" onchange="updateLeadField(${lead.id},'country',this.value)"></div>
-        <div class="field"><label>Nota spedizione</label><input type="text" value="${lead.addrnote||''}" onchange="updateLeadField(${lead.id},'addrnote',this.value)"></div>
-      </div>
+      <div class="field-row"><div class="field"><label>Email</label><input type="email" value="${lead.email||''}" onchange="updateLeadField(${lead.id},'email',this.value)"></div><div class="field"><label>Telefono</label><input type="text" value="${lead.phone||''}" onchange="updateLeadField(${lead.id},'phone',this.value)"></div></div>
+      <div class="field"><label>Note</label><textarea onchange="updateLeadField(${lead.id},'notes',this.value)">${lead.notes||''}</textarea></div>
     </div>
     <div class="samples-section" style="padding-top:10px">
-      <p class="samples-title"><i class="ti ti-flask" style="font-size:12px"></i> Campioni richiesti ${lead.samples.length?`<span class="badge b-teal">${lead.samples.length}</span>`:''}</p>
-      <div id="modal-samples-${lead.id}">
-        ${lead.samples.length?lead.samples.map(s=>`<div class="sample-item"><i class="ti ti-droplet" style="font-size:13px;color:var(--teal)"></i><span class="sample-name">${s.product}</span><span class="badge b-teal">${s.qty}</span><button class="btn btn-danger btn-sm" onclick="removeSampleModal(${lead.id},${s.id})"><i class="ti ti-x"></i></button></div>`).join(''):'<p style="font-size:12px;color:var(--text3);padding:4px 0">Nessun campione.</p>'}
-      </div>
-      <div class="add-row" style="margin-top:8px">
-        <select id="modal-as-p-${lead.id}">${PRODUCTS_HTML}</select>
-        <select id="modal-as-q-${lead.id}"><option value="30 ml">30 ml</option><option value="60 ml">60 ml</option></select>
-        <button class="btn btn-success btn-sm" onclick="addSampleModal(${lead.id})"><i class="ti ti-plus"></i></button>
-      </div>
+      <p class="samples-title"><i class="ti ti-flask" style="font-size:12px"></i> Campioni ${lead.samples.length?`<span class="badge b-teal">${lead.samples.length}</span>`:''}</p>
+      <div id="modal-samples-${lead.id}">${lead.samples.length?lead.samples.map(s=>`<div class="sample-item"><i class="ti ti-droplet" style="font-size:13px;color:var(--teal)"></i><span class="sample-name">${s.product}</span><span class="badge b-teal">${s.qty}</span><button class="btn btn-danger btn-sm" onclick="removeSampleModal(${lead.id},${s.id})"><i class="ti ti-x"></i></button></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">Nessun campione.</p>'}</div>
+      <div class="add-row" style="margin-top:8px"><select id="modal-as-p-${lead.id}">${PRODUCTS_HTML}</select><select id="modal-as-q-${lead.id}"><option value="30 ml">30 ml</option><option value="60 ml">60 ml</option></select><button class="btn btn-success btn-sm" onclick="addSampleModal(${lead.id})"><i class="ti ti-plus"></i></button></div>
     </div>
-    <div class="btn-row" style="margin-top:14px">
-      <button class="btn btn-sm" onclick="closeContactModal()">Chiudi</button>
-      <button class="btn btn-primary btn-sm" onclick="saveAndCloseModal(${lead.id})"><i class="ti ti-check"></i> Salva e chiudi</button>
-    </div>
-  `;
-  modal.style.display='block';
+    <div class="btn-row" style="margin-top:14px"><button class="btn btn-sm" onclick="closeContactModal()">Chiudi</button><button class="btn btn-primary btn-sm" onclick="closeContactModal()"><i class="ti ti-check"></i> Salva e chiudi</button></div>`;
+  document.getElementById('contact-modal').style.display='block';
 }
-
-function closeContactModal(){
-  document.getElementById('contact-modal').style.display='none';
-  renderLeads();renderAppts();saveData();
-}
-
-function saveAndCloseModal(leadId){
-  closeContactModal();
-}
-
-function updateLeadField(leadId,field,value){
-  const lead=data.leads.find(l=>l.id===leadId);
-  if(lead)lead[field]=value;
-}
-
+function closeContactModal(){document.getElementById('contact-modal').style.display='none';renderLeads();renderAppts();saveData();}
+function updateLeadField(leadId,field,value){const lead=data.leads.find(l=>l.id===leadId);if(lead)lead[field]=value;}
 function addSampleModal(leadId){
-  const sel=document.getElementById('modal-as-p-'+leadId);
-  const p=sel.value;if(!p)return;
+  const sel=document.getElementById('modal-as-p-'+leadId);const p=sel.value;if(!p)return;
   const lead=data.leads.find(l=>l.id===leadId);if(!lead)return;
   lead.samples.push({id:Date.now(),product:p,qty:document.getElementById('modal-as-q-'+leadId).value});
   sel.value='';
-  // refresh modal samples list
   const el=document.getElementById('modal-samples-'+leadId);
   if(el)el.innerHTML=lead.samples.map(s=>`<div class="sample-item"><i class="ti ti-droplet" style="font-size:13px;color:var(--teal)"></i><span class="sample-name">${s.product}</span><span class="badge b-teal">${s.qty}</span><button class="btn btn-danger btn-sm" onclick="removeSampleModal(${leadId},${s.id})"><i class="ti ti-x"></i></button></div>`).join('');
   updateStats();
 }
-
 function removeSampleModal(leadId,sampleId){
   const lead=data.leads.find(l=>l.id===leadId);
   if(lead)lead.samples=lead.samples.filter(s=>s.id!==sampleId);
   const el=document.getElementById('modal-samples-'+leadId);
-  if(el)el.innerHTML=lead.samples.length?lead.samples.map(s=>`<div class="sample-item"><i class="ti ti-droplet" style="font-size:13px;color:var(--teal)"></i><span class="sample-name">${s.product}</span><span class="badge b-teal">${s.qty}</span><button class="btn btn-danger btn-sm" onclick="removeSampleModal(${leadId},${s.id})"><i class="ti ti-x"></i></button></div>`).join(''):'<p style="font-size:12px;color:var(--text3);padding:4px 0">Nessun campione.</p>';
+  if(el)el.innerHTML=lead.samples.length?lead.samples.map(s=>`<div class="sample-item"><i class="ti ti-droplet" style="font-size:13px;color:var(--teal)"></i><span class="sample-name">${s.product}</span><span class="badge b-teal">${s.qty}</span><button class="btn btn-danger btn-sm" onclick="removeSampleModal(${leadId},${s.id})"><i class="ti ti-x"></i></button></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">Nessun campione.</p>';
   updateStats();
 }
+function openNewContactFromAppt(name,company){switchTab('leads');setTimeout(()=>{document.getElementById('l-name').value=name;document.getElementById('l-company').value=company;document.getElementById('l-name').focus();},100);}
 
-function openNewContactFromAppt(name,company){
-  // Switch to leads tab and pre-fill name/company
-  switchTab('leads');
-  setTimeout(()=>{
-    document.getElementById('l-name').value=name;
-    document.getElementById('l-company').value=company;
-    document.getElementById('l-name').focus();
-  },100);
-}
-
-/* ── RIEPILOGO CAMPIONI RESPONSABILE ── */
+// ── CAMPIONI RESPONSABILE ──
 function buildRiepilogoCampioni(){
   const today=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
   const all=data.leads.filter(l=>l.samples&&l.samples.length);
   if(!all.length)return null;
-  let txt='SIMPPAR 2026 — ORDINE CAMPIONI DA PREPARARE\n';
-  txt+='Grasse · '+today+'\n';
-  txt+='════════════════════════════════════════\n\n';
-  txt+='TOTALE CONTATTI CON CAMPIONI: '+all.length+'\n';
-  txt+='TOTALE CAMPIONI: '+all.reduce((a,l)=>a+l.samples.length,0)+'\n\n';
-  txt+='════════════════════════════════════════\n\n';
+  let txt='SIMPPAR 2026 — ORDINE CAMPIONI\nGrasse · '+today+'\n\n';
   all.forEach((l,i)=>{
     const addr=buildAddr(l);
-    txt+=(i+1)+'. '+l.name.toUpperCase()+' — '+l.company+'\n';
+    txt+=(i+1)+'. '+l.name+' — '+l.company+'\n';
     if(l.email)txt+='   Email: '+l.email+'\n';
-    if(l.phone)txt+='   Tel: '+l.phone+'\n';
-    txt+='   📦 SPEDIRE A: '+(addr||'⚠️ INDIRIZZO MANCANTE')+(l.addrnote?' ('+l.addrnote+')':'')+'\n';
-    txt+='   CAMPIONI:\n';
-    l.samples.forEach(s=>txt+='     • '+s.product+' — '+s.qty+'\n');
-    if(l.notes)txt+='   NOTE: '+l.notes+'\n';
+    txt+='   SPEDIRE A: '+(addr||'⚠️ INDIRIZZO MANCANTE')+(l.addrnote?' ('+l.addrnote+')':'')+'\n';
+    l.samples.forEach(s=>txt+='   • '+s.product+' — '+s.qty+'\n');
     txt+='\n';
   });
-  txt+='════════════════════════════════════════\n';
-  txt+='Generato da SIMPPAR CRM 2026 · Simone Gatto';
   return txt;
 }
-
 function emailRiepilogoResponsabile(){
-  const txt=buildRiepilogoCampioni();
-  if(!txt){alert('Nessun campione da inviare.');return;}
+  const txt=buildRiepilogoCampioni();if(!txt){alert('Nessun campione.');return;}
   const today=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
-  const subject='SIMPPAR 2026 — Ordine campioni da preparare · '+today;
-  window.location.href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(txt);
+  window.location.href='mailto:?subject='+encodeURIComponent('SIMPPAR 2026 — Ordine campioni · '+today)+'&body='+encodeURIComponent(txt);
 }
-
 function printRiepilogoCampioni(){
-  const txt=buildRiepilogoCampioni();
-  if(!txt){alert('Nessun campione da stampare.');return;}
-  const today=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
-  const all=data.leads.filter(l=>l.samples&&l.samples.length);
-  let html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>Riepilogo Campioni SIMPPAR 2026</title>
-  <style>
-    body{font-family:Arial,sans-serif;font-size:13px;color:#1A1A18;max-width:800px;margin:0 auto;padding:2rem}
-    h1{font-size:20px;color:#0F6E56;border-bottom:2px solid #0F6E56;padding-bottom:8px}
-    h2{font-size:13px;color:#6B6860;font-weight:normal;margin-top:0}
-    .totali{background:#E1F5EE;border-radius:8px;padding:10px 14px;margin:1rem 0;display:flex;gap:2rem}
-    .tot{text-align:center}.tot-n{font-size:24px;font-weight:700;color:#0F6E56}.tot-l{font-size:11px;color:#085041;text-transform:uppercase}
-    .contatto{border:0.5px solid #D0CEC8;border-radius:8px;padding:12px 14px;margin-bottom:12px;page-break-inside:avoid}
-    .c-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-    .c-name{font-size:14px;font-weight:700;color:#1A1A18}
-    .c-company{font-size:12px;color:#6B6860}
-    .addr{background:#F2F0EB;border-radius:6px;padding:6px 10px;font-size:12px;color:#6B6860;margin:6px 0}
-    .samples{list-style:none;padding:0;margin:6px 0}
-    .samples li{padding:4px 0;border-bottom:0.5px solid #E8E5DE;font-size:13px;display:flex;justify-content:space-between}
-    .samples li:last-child{border-bottom:none}
-    .qty{background:#E1F5EE;color:#085041;padding:1px 7px;border-radius:4px;font-weight:700;font-size:11px}
-    .note{background:#FAEEDA;border-radius:6px;padding:6px 10px;font-size:12px;color:#633806;margin-top:6px}
-    .footer{margin-top:2rem;padding-top:1rem;border-top:1px solid #D0CEC8;font-size:11px;color:#9A9790;text-align:center}
-    @media print{body{padding:1rem}.contatto{page-break-inside:avoid}}
-  </style></head><body>
-  <h1>SIMPPAR 2026 — Ordine Campioni da Preparare</h1>
-  <h2>Grasse · ${today}</h2>
-  <div class="totali">
-    <div class="tot"><div class="tot-n">${all.length}</div><div class="tot-l">Clienti</div></div>
-    <div class="tot"><div class="tot-n">${all.reduce((a,l)=>a+l.samples.length,0)}</div><div class="tot-l">Campioni totali</div></div>
-    <div class="tot"><div class="tot-n">${all.filter(l=>buildAddr(l)).length}</div><div class="tot-l">Indirizzi confermati</div></div>
-    <div class="tot"><div class="tot-n">${all.filter(l=>!buildAddr(l)).length}</div><div class="tot-l" style="color:#854F0B">⚠️ Indirizzi mancanti</div></div>
-  </div>`;
-
-  all.forEach((l,i)=>{
-    const addr=buildAddr(l);
-    html+=`<div class="contatto">
-      <div class="c-header">
-        <div><div class="c-name">${i+1}. ${l.name}</div><div class="c-company">${l.company}${l.role?' · '+l.role:''}</div></div>
-        <div style="text-align:right;font-size:11px;color:#6B6860">${l.email?'✉ '+l.email+'<br>':''}${l.phone?'📞 '+l.phone:''}</div>
-      </div>
-      <div class="addr">${addr?'📦 <strong>Spedire a:</strong> '+addr+(l.addrnote?' ('+l.addrnote+')':''):'<span style="color:#854F0B">⚠️ Indirizzo mancante — da confermare</span>'}</div>
-      <ul class="samples">
-        ${l.samples.map(s=>`<li><span>${s.product}</span><span class="qty">${s.qty}</span></li>`).join('')}
-      </ul>
-      ${l.notes?`<div class="note">📝 <strong>Note:</strong> ${l.notes}</div>`:''}
-    </div>`;
-  });
-
-  html+=`<div class="footer">Generato da SIMPPAR CRM 2026 · Simone Gatto · info@simonegatto.com · ${today}</div>
-  </body></html>`;
-
+  const txt=buildRiepilogoCampioni();if(!txt){alert('Nessun campione.');return;}
   const w=window.open('','_blank');
-  w.document.write(html);
-  w.document.close();
-  setTimeout(()=>w.print(),500);
+  w.document.write('<pre style="font-family:monospace;padding:2rem">'+txt+'</pre>');
+  w.document.close();setTimeout(()=>w.print(),300);
 }
 
-/* ── SALVATAGGIO LOCALE ── */
+// ── STORAGE ──
 const STORAGE_KEY='simppar_crm_2026';
-
 function saveData(){
-  try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify({leads:data.leads,appts:data.appts,notes:data.notes,savedAt:new Date().toISOString()}));
-    showSaveIndicator();
-  }catch(e){console.warn('Salvataggio fallito:',e);}
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify({leads:data.leads,appts:data.appts,notes:data.notes,savedAt:new Date().toISOString()}));showSaveIndicator();}
+  catch(e){console.warn('Salvataggio fallito:',e);}
 }
-
 function loadData(){
   try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw)return;
+    const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;
     const saved=JSON.parse(raw);
     if(saved.leads)data.leads=saved.leads;
     if(saved.appts)data.appts=saved.appts;
     if(saved.notes)data.notes=saved.notes;
     renderLeads();renderAppts();renderNotes();updateStats();
-    if(saved.savedAt){
-      const d=new Date(saved.savedAt);
-      document.getElementById('last-saved').textContent='Ultimo salvataggio: '+d.toLocaleString('it-IT');
-    }
+    if(saved.savedAt)document.getElementById('last-saved').textContent='Salvato: '+new Date(saved.savedAt).toLocaleString('it-IT');
   }catch(e){console.warn('Caricamento fallito:',e);}
 }
-
 function clearData(){
-  if(!confirm('Sei sicuro di voler cancellare tutti i dati? L\'operazione non è reversibile.'))return;
+  if(!confirm('Cancellare tutti i dati?'))return;
   localStorage.removeItem(STORAGE_KEY);
   data.leads=[];data.appts=[];data.notes=[];
   renderLeads();renderAppts();renderNotes();updateStats();
-  document.getElementById('last-saved').textContent='Dati cancellati.';
 }
-
 function exportJSON(){
   const json=JSON.stringify({leads:data.leads,appts:data.appts,notes:data.notes,exportedAt:new Date().toISOString()},null,2);
-  const blob=new Blob([json],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='simppar_crm_backup_'+new Date().toISOString().split('T')[0]+'.json';
-  a.click();
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+  a.download='simppar_backup_'+new Date().toISOString().split('T')[0]+'.json';a.click();
 }
-
 function importJSON(input){
   if(!input.files||!input.files[0])return;
   const reader=new FileReader();
@@ -948,149 +752,54 @@ function importJSON(input){
       if(parsed.leads)data.leads=parsed.leads;
       if(parsed.appts)data.appts=parsed.appts;
       if(parsed.notes)data.notes=parsed.notes;
-      renderLeads();renderAppts();renderNotes();updateStats();
-      saveData();
-      alert('Dati importati con successo!');
+      renderLeads();renderAppts();renderNotes();updateStats();saveData();
+      alert('Dati importati!');
     }catch(err){alert('File non valido.');}
   };
   reader.readAsText(input.files[0]);
 }
-
 function showSaveIndicator(){
   const el=document.getElementById('save-indicator');
   const ls=document.getElementById('last-saved');
-  el.style.opacity='1';
-  ls.textContent='Salvato: '+new Date().toLocaleTimeString('it-IT');
-  setTimeout(()=>el.style.opacity='0',2000);
+  if(el)el.style.opacity='1';
+  if(ls)ls.textContent='Salvato: '+new Date().toLocaleTimeString('it-IT');
+  setTimeout(()=>{if(el)el.style.opacity='0';},2000);
 }
-
 function buildRiepilogoTesto(){
   const today=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
-  let txt='SIMPPAR 2026 — RIEPILOGO GIORNALIERO\n';
-  txt+='Grasse · '+today+'\n';
-  txt+='════════════════════════════════\n\n';
-
-  txt+='📋 CONTATTI REGISTRATI ('+data.leads.length+')\n';
-  txt+='────────────────────────────────\n';
+  let txt='SIMPPAR 2026 — RIEPILOGO\nGrasse · '+today+'\n\n';
+  txt+='CONTATTI ('+data.leads.length+')\n';
   data.leads.forEach((l,i)=>{
-    txt+=(i+1)+'. '+l.name+' — '+l.company;
-    if(l.role)txt+=' ('+l.role+')';
-    txt+='\n';
-    if(l.email)txt+='   ✉ '+l.email+'\n';
-    if(l.phone)txt+='   📞 '+l.phone+'\n';
-    if(l.interest)txt+='   💡 '+l.interest+'\n';
-    if(l.priority)txt+='   ⚡ Priorità: '+l.priority+'\n';
-    if(l.followup)txt+='   📅 Follow-up: '+formatDateLong(l.followup)+'\n';
-    if(l.samples&&l.samples.length){
-      txt+='   🧪 Campioni: '+l.samples.map(s=>s.product+' ('+s.qty+')').join(', ')+'\n';
-    }
-    const addr=buildAddr(l);
-    if(addr)txt+='   📦 Spedizione: '+addr+(l.addrnote?' · '+l.addrnote:'')+'\n';
-    txt+='\n';
+    txt+=(i+1)+'. '+l.name+' — '+l.company+(l.email?' | '+l.email:'')+(l.phone?' | '+l.phone:'')+'\n';
+    if(l.samples&&l.samples.length)txt+='   Campioni: '+l.samples.map(s=>s.product+' ('+s.qty+')').join(', ')+'\n';
   });
-
-  const totSamples=data.leads.reduce((a,l)=>a+(l.samples?l.samples.length:0),0);
-  txt+='\n🧪 CAMPIONI TOTALI DA SPEDIRE: '+totSamples+'\n';
-  txt+='────────────────────────────────\n';
-  data.leads.filter(l=>l.samples&&l.samples.length).forEach(l=>{
-    const addr=buildAddr(l);
-    txt+=l.name+' ('+l.company+'):\n';
-    l.samples.forEach(s=>txt+='  • '+s.product+' — '+s.qty+'\n');
-    if(addr)txt+='  📦 '+addr+(l.addrnote?' · '+l.addrnote:'')+'\n';
-    txt+='\n';
-  });
-
-  if(data.appts.length){
-    txt+='\n📅 APPUNTAMENTI ('+data.appts.length+')\n';
-    txt+='────────────────────────────────\n';
-    const sorted=[...data.appts].sort((a,b)=>(a.day+a.time).localeCompare(b.day+b.time));
-    sorted.forEach(a=>{
-      txt+=a.day+' '+a.time+' — '+a.name+(a.company?' ('+a.company+')':'')+'\n';
-      txt+='  '+a.type+' · '+a.status+(a.notes?' · '+a.notes:'')+'\n';
-    });
-  }
-
-  if(data.notes.length){
-    txt+='\n📝 NOTE & FOLLOW-UP ('+data.notes.length+')\n';
-    txt+='────────────────────────────────\n';
-    data.notes.forEach(n=>{
-      txt+=(n.person||'Nota generale')+' ('+n.date+'):\n';
-      txt+='  '+n.text+'\n';
-      if(n.followup)txt+='  📅 Follow-up: '+formatDateLong(n.followup)+'\n';
-      txt+='\n';
-    });
-  }
-
-  txt+='════════════════════════════════\n';
-  txt+='Generato da SIMPPAR CRM 2026 · info@simonegatto.com';
   return txt;
 }
-
 function inviaBackupEmail(){
-  if(!data.leads.length&&!data.appts.length&&!data.notes.length){
-    alert('Nessun dato da inviare ancora.');return;
-  }
-  const today=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
-  const subject='SIMPPAR 2026 — Riepilogo '+today;
-  const body=buildRiepilogoTesto();
-  // Also trigger JSON download as attachment workaround
+  if(!data.leads.length){alert('Nessun dato.');return;}
   exportJSON();
-  // Open mail client with summary
-  setTimeout(()=>{
-    window.location.href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  },500);
+  setTimeout(()=>{window.location.href='mailto:?subject='+encodeURIComponent('SIMPPAR 2026 — Riepilogo '+new Date().toLocaleDateString('it-IT'))+'&body='+encodeURIComponent(buildRiepilogoTesto());},500);
 }
-
 function copiaRiepilogo(){
-  if(!data.leads.length&&!data.appts.length&&!data.notes.length){
-    alert('Nessun dato da copiare.');return;
-  }
-  const txt=buildRiepilogoTesto();
-  navigator.clipboard.writeText(txt)
-    .then(()=>alert('✅ Riepilogo copiato! Incollalo in WhatsApp o email.'))
-    .catch(()=>{
-      // fallback
-      const ta=document.createElement('textarea');
-      ta.value=txt;document.body.appendChild(ta);ta.select();
-      document.execCommand('copy');document.body.removeChild(ta);
-      alert('✅ Riepilogo copiato!');
-    });
+  if(!data.leads.length){alert('Nessun dato.');return;}
+  navigator.clipboard.writeText(buildRiepilogoTesto()).then(()=>alert('Riepilogo copiato!')).catch(()=>alert(buildRiepilogoTesto()));
 }
 
-// Auto-save ad ogni modifica
-const _origAddLead=addLead;
-// Patch all mutating functions to auto-save
-function patchSave(){
-  ['addLead','addAppt','addNote','deleteLead','deleteAppt','deleteNote','addSampleToLead','removeSampleFromLead'].forEach(fn=>{
-    const orig=window[fn];
-    window[fn]=function(){orig.apply(this,arguments);saveData();};
-  });
-}
-
-/* ── INIT ── */
+// ── INIT ──
 initCal();
-
-// Inject save bar into header
 document.querySelector('.header').insertAdjacentHTML('beforeend',`
-  <div style="display:flex;align-items:center;gap:6px;margin-left:8px">
+  <div style="display:flex;align-items:center;gap:6px;margin-left:8px;flex-wrap:wrap">
     <div id="save-indicator" style="width:8px;height:8px;border-radius:50%;background:var(--teal);opacity:0;transition:opacity .3s;flex-shrink:0"></div>
-    <span id="last-saved" style="font-size:10px;color:var(--text3);white-space:nowrap;display:none"></span>
-    <button class="btn btn-sm btn-success" onclick="copiaRiepilogo()" title="Copia riepilogo da inviare su WhatsApp o email" style="padding:3px 8px;font-size:11px;display:flex;align-items:center;gap:3px"><i class="ti ti-clipboard-text"></i> <span style="font-size:10px">Copia</span></button>
-    <button class="btn btn-sm btn-info" onclick="inviaBackupEmail()" title="Invia riepilogo via email ai colleghi" style="padding:3px 8px;font-size:11px;display:flex;align-items:center;gap:3px"><i class="ti ti-send"></i> <span style="font-size:10px">Email</span></button>
-    <button class="btn btn-sm" onclick="exportJSON()" title="Esporta backup JSON" style="padding:3px 7px;font-size:11px"><i class="ti ti-download"></i></button>
+    <span id="last-saved" style="font-size:10px;color:var(--text3);white-space:nowrap"></span>
+    <button class="btn btn-sm btn-success" onclick="copiaRiepilogo()" style="padding:3px 8px;font-size:11px"><i class="ti ti-clipboard-text"></i> Copia</button>
+    <button class="btn btn-sm btn-info" onclick="inviaBackupEmail()" style="padding:3px 8px;font-size:11px"><i class="ti ti-send"></i> Email</button>
+    <button class="btn btn-sm" onclick="exportCSV()" style="padding:3px 8px;font-size:11px;background:var(--success-bg);color:var(--success-text);border-color:transparent" title="Esporta Excel/CSV"><i class="ti ti-table-export"></i> Excel</button>
+    <button class="btn btn-sm" onclick="exportJSON()" style="padding:3px 7px;font-size:11px" title="Backup JSON"><i class="ti ti-download"></i></button>
     <input type="file" id="import-input" accept=".json" style="display:none" onchange="importJSON(this)">
-    <button class="btn btn-sm" onclick="document.getElementById('import-input').click()" title="Importa backup JSON dai colleghi" style="padding:3px 7px;font-size:11px"><i class="ti ti-upload"></i></button>
-    <button class="btn btn-danger btn-sm" onclick="clearData()" title="Cancella tutti i dati" style="padding:3px 7px;font-size:11px"><i class="ti ti-trash"></i></button>
+    <button class="btn btn-sm" onclick="document.getElementById('import-input').click()" style="padding:3px 7px;font-size:11px" title="Importa JSON"><i class="ti ti-upload"></i></button>
+    <button class="btn btn-danger btn-sm" onclick="clearData()" style="padding:3px 7px;font-size:11px" title="Cancella tutto"><i class="ti ti-trash"></i></button>
   </div>
 `);
-
-// Show last-saved text only if there's data
-document.getElementById('last-saved').style.display='block';
-
-// Patch save on init (after all functions defined)
-patchSave();
-
-// Load saved data on startup
 loadData();
 </script>
 </body>
