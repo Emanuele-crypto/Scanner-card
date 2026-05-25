@@ -455,6 +455,8 @@ function renderFuList(){
 }
 
 // ── SCAN ──
+const WORKER_URL = 'https://lucky-breeze-b4d1.e-donnina.workers.dev';
+
 async function handleCardScan(input){
   if(!input.files||!input.files[0])return;
   const file=input.files[0];
@@ -464,12 +466,30 @@ async function handleCardScan(input){
     document.getElementById('scan-preview').src=base64;document.getElementById('scan-preview').style.display='block';
     document.getElementById('ai-loading').style.display='flex';
     try{
-      const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type||'image/jpeg',data:base64.split(',')[1]}},{type:'text',text:'Analizza questo biglietto da visita. Rispondi SOLO con JSON valido senza testo aggiuntivo o backtick. Chiavi: name, company, role, email, phone, addr1, zip, city, country. Stringa vuota se manca.'}]}]})});
+      // Converti in JPEG tramite canvas (supporto HEIC/iPhone)
+      const img=new Image();
+      await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=base64;});
+      const canvas=document.createElement('canvas');
+      const MAX=1600;let w=img.naturalWidth,h=img.naturalHeight;
+      if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}
+      if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}
+      canvas.width=w;canvas.height=h;
+      const ctx=canvas.getContext('2d');
+      ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+      ctx.drawImage(img,0,0,w,h);
+      const jpegBase64=canvas.toDataURL('image/jpeg',0.92).split(',')[1];
+
+      const resp=await fetch(WORKER_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({imageBase64:jpegBase64,mimeType:'image/jpeg'})
+      });
       const result=await resp.json();
-      const parsed=JSON.parse(result.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim());
+      if(result.error)throw new Error(result.error);
+      const parsed=result.data;
       const map={name:'l-name',company:'l-company',role:'l-role',email:'l-email',phone:'l-phone',addr1:'l-addr1',zip:'l-zip',city:'l-city',country:'l-country'};
       Object.entries(map).forEach(([k,id])=>{if(parsed[k])document.getElementById(id).value=parsed[k];});
-    }catch(e){alert('Errore lettura biglietto. Inserisci manualmente.');}
+    }catch(e){alert('Errore lettura biglietto: '+e.message+'\nInserisci manualmente.');}
     finally{document.getElementById('ai-loading').style.display='none';}
   };
   reader.readAsDataURL(file);
