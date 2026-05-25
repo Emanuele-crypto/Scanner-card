@@ -6,207 +6,68 @@
 <title>Card Scanner</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
-
 :root {
-  --bg: #0e0e0e;
-  --surface: #161616;
-  --surface2: #1f1f1f;
-  --border: #2a2a2a;
-  --accent: #e8ff47;
-  --accent2: #47c8ff;
-  --text: #e8e8e8;
-  --dim: #888;
-  --danger: #ff4747;
-  --success: #47ff8e;
-  --warn: #ffb347;
-  --mono: 'IBM Plex Mono', monospace;
-  --sans: 'IBM Plex Sans', sans-serif;
+  --bg:#0e0e0e;--surface:#161616;--surface2:#1f1f1f;--border:#2a2a2a;
+  --accent:#e8ff47;--accent2:#47c8ff;--text:#e8e8e8;--dim:#888;
+  --danger:#ff4747;--success:#47ff8e;--warn:#ffb347;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  min-height: 100vh;
-  padding: 24px;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
-  pointer-events: none;
-  z-index: 9999;
-}
-
-header {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 28px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 18px;
-}
-
-header h1 { font-family: var(--mono); font-size: 1.4rem; font-weight: 600; color: var(--accent); }
-header span { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; }
-
-.config-wrap {
-  max-width: 1100px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
-
-.config-bar {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
-.config-bar:hover { color: var(--text); }
-
-.sdot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--border); margin-right: 5px; vertical-align: middle; transition: background 0.3s; }
-.sdot.ok   { background: var(--success); }
-.sdot.warn { background: var(--warn); }
-
-.config-grid {
-  padding: 20px;
-}
-
-.cblock label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); display: block; margin-bottom: 6px; }
-
-.irow { display: flex; gap: 8px; align-items: center; }
-
-.irow input {
-  flex: 1;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  padding: 9px 12px;
-  outline: none;
-  transition: border-color 0.15s;
-  width: 100%;
-}
-.irow input:focus { border-color: var(--accent); }
-
-.cnote { font-size: 0.71rem; color: var(--dim); margin-top: 7px; line-height: 1.6; }
-.cnote .w { color: var(--warn); font-family: var(--mono); font-size: 0.68rem; }
-
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 1100px;
-}
-@media (max-width: 780px) { .layout { grid-template-columns: 1fr; } }
-
-.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-
-.phead {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pbody { padding: 20px; }
-
-#drop-zone {
-  border: 2px dashed var(--border);
-  border-radius: 4px;
-  aspect-ratio: 16/9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-#drop-zone:hover, #drop-zone.over { border-color: var(--accent); background: rgba(232,255,71,0.04); }
-#drop-zone .ico { font-size: 2.4rem; opacity: 0.35; }
-#drop-zone p { font-family: var(--mono); font-size: 0.77rem; color: var(--dim); text-align: center; }
-#drop-zone p strong { color: var(--accent); }
-#drop-zone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #111; }
-#file-input { display: none; }
-
-.brow { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
-
-button { font-family: var(--mono); font-size: 0.77rem; letter-spacing: 0.05em; padding: 9px 16px; border: 1px solid; border-radius: 3px; cursor: pointer; transition: all 0.15s; font-weight: 500; }
-
-.bp { background: var(--accent); color: #0e0e0e; border-color: var(--accent); }
-.bp:hover { background: #f5ff70; }
-.bp:disabled { opacity: 0.35; cursor: not-allowed; }
-
-.bg { background: transparent; color: var(--dim); border-color: var(--border); }
-.bg:hover { border-color: var(--dim); color: var(--text); }
-
-.bs { background: transparent; color: var(--success); border-color: var(--success); }
-.bs:hover { background: rgba(71,255,142,0.08); }
-.bs:disabled { opacity: 0.3; cursor: not-allowed; }
-
-.bd { background: transparent; color: var(--danger); border-color: var(--danger); }
-.bd:hover { background: rgba(255,71,71,0.08); }
-
-#status { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); margin-top: 14px; min-height: 18px; display: flex; align-items: center; gap: 8px; }
-#status.loading { color: var(--accent2); }
-#status.error   { color: var(--danger); }
-#status.ok      { color: var(--success); }
-
-.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-.spin { width: 12px; height: 12px; border: 2px solid rgba(71,200,255,0.3); border-top-color: var(--accent2); border-radius: 50%; animation: sp 0.7s linear infinite; flex-shrink: 0; }
-@keyframes sp { to { transform: rotate(360deg); } }
-
-.field { margin-bottom: 14px; }
-.field label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); display: block; margin-bottom: 5px; }
-.field input, .field textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 3px; color: var(--text); font-family: var(--sans); font-size: 0.87rem; padding: 9px 12px; outline: none; transition: border-color 0.15s; }
-.field input:focus, .field textarea:focus { border-color: var(--accent); }
-.field textarea { resize: vertical; min-height: 58px; }
-.field input.filled { border-color: rgba(232,255,71,0.3); background: rgba(232,255,71,0.03); }
-
-.r2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-#contacts-panel { grid-column: 1 / -1; }
-
-#clist { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; }
-
-.cc { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 15px; position: relative; transition: border-color 0.15s; }
-.cc:hover { border-color: #3a3a3a; }
-.cc .cn { font-weight: 500; font-size: 0.94rem; margin-bottom: 3px; }
-.cc .co { font-family: var(--mono); font-size: 0.71rem; color: var(--accent); margin-bottom: 9px; }
-.cc .cd { font-size: 0.79rem; color: var(--dim); line-height: 1.75; }
-.cc .cd span { display: block; }
-.cc .dt { font-family: var(--mono); font-size: 0.59rem; letter-spacing: 0.08em; color: var(--dim); opacity: 0.45; position: absolute; top: 10px; right: 11px; }
-
-.empty { font-family: var(--mono); font-size: 0.77rem; color: var(--dim); padding: 22px 0; text-align: center; opacity: 0.45; }
-.erow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;padding:24px;}
+header{display:flex;align-items:baseline;gap:16px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:18px;}
+header h1{font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--accent);}
+header span{font-family:var(--mono);font-size:0.7rem;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;}
+.box{max-width:1100px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:20px;overflow:hidden;}
+.box-head{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;}
+.box-body{padding:20px;}
+label.lbl{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px;}
+.irow{display:flex;gap:8px;align-items:center;}
+.irow input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--mono);font-size:0.78rem;padding:9px 12px;outline:none;transition:border-color 0.15s;}
+.irow input:focus{border-color:var(--accent);}
+.note{font-size:0.71rem;color:var(--dim);margin-top:7px;line-height:1.6;}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1100px;}
+@media(max-width:780px){.layout{grid-template-columns:1fr;}}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.phead{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;}
+.pbody{padding:20px;}
+#dz{border:2px dashed var(--border);border-radius:4px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:border-color 0.2s,background 0.2s;position:relative;overflow:hidden;}
+#dz:hover,#dz.over{border-color:var(--accent);background:rgba(232,255,71,0.04);}
+#dz .ico{font-size:2.4rem;opacity:0.35;}
+#dz p{font-family:var(--mono);font-size:0.77rem;color:var(--dim);text-align:center;}
+#dz p strong{color:var(--accent);}
+#dz img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#111;}
+#fi{display:none;}
+.brow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+button{font-family:var(--mono);font-size:0.77rem;letter-spacing:0.05em;padding:9px 16px;border:1px solid;border-radius:3px;cursor:pointer;transition:all 0.15s;font-weight:500;}
+.bp{background:var(--accent);color:#0e0e0e;border-color:var(--accent);}
+.bp:hover{background:#f5ff70;}
+.bp:disabled{opacity:0.35;cursor:not-allowed;}
+.bg{background:transparent;color:var(--dim);border-color:var(--border);}
+.bg:hover{border-color:var(--dim);color:var(--text);}
+.bs{background:transparent;color:var(--success);border-color:var(--success);}
+.bs:hover{background:rgba(71,255,142,0.08);}
+.bs:disabled{opacity:0.3;cursor:not-allowed;}
+#st{font-family:var(--mono);font-size:0.72rem;color:var(--dim);margin-top:14px;min-height:18px;display:flex;align-items:center;gap:8px;}
+#st.loading{color:var(--accent2);}#st.error{color:var(--danger);}#st.ok{color:var(--success);}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.spin{width:12px;height:12px;border:2px solid rgba(71,200,255,0.3);border-top-color:var(--accent2);border-radius:50%;animation:sp 0.7s linear infinite;flex-shrink:0;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.field{margin-bottom:14px;}
+.field label{font-family:var(--mono);font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:5px;}
+.field input,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--sans);font-size:0.87rem;padding:9px 12px;outline:none;transition:border-color 0.15s;}
+.field input:focus,.field textarea:focus{border-color:var(--accent);}
+.field textarea{resize:vertical;min-height:58px;}
+.field input.ok{border-color:rgba(232,255,71,0.3);background:rgba(232,255,71,0.03);}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+#cp{grid-column:1/-1;}
+#cl{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;}
+.cc{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:15px;position:relative;}
+.cc .cn{font-weight:500;font-size:0.94rem;margin-bottom:3px;}
+.cc .co{font-family:var(--mono);font-size:0.71rem;color:var(--accent);margin-bottom:9px;}
+.cc .cd{font-size:0.79rem;color:var(--dim);line-height:1.75;}
+.cc .cd span{display:block;}
+.cc .dt{font-family:var(--mono);font-size:0.59rem;color:var(--dim);opacity:0.45;position:absolute;top:10px;right:11px;}
+.empty{font-family:var(--mono);font-size:0.77rem;color:var(--dim);padding:22px 0;text-align:center;opacity:0.45;}
 </style>
 </head>
 <body>
@@ -216,45 +77,36 @@ button { font-family: var(--mono); font-size: 0.77rem; letter-spacing: 0.05em; p
   <span>OCR biglietti da visita — Google Apps Script</span>
 </header>
 
-<div class="config-wrap">
-  <div class="config-bar" onclick="toggleCfg()">
-    <span><span class="sdot" id="d-url"></span>Google Apps Script URL</span>
-    <span id="cfg-lbl" style="font-size:0.65rem;">▾ configurazione</span>
-  </div>
-  <div class="config-grid" id="cfg-body">
-    <div class="cblock">
-      <label>Google Apps Script URL</label>
-      <div class="irow">
-        <input type="text" id="script-url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
-        <button class="bg" onclick="saveScriptUrl()">Salva</button>
-      </div>
-      <div class="cnote">
-        Salvato in localStorage — non nel codice sorgente.<br>
-        <span class="w">Nota:</span> la API key Anthropic va inserita direttamente nello script Google Apps Script.
-      </div>
+<div class="box">
+  <div class="box-head">Configurazione</div>
+  <div class="box-body">
+    <label class="lbl">Google Apps Script URL</label>
+    <div class="irow">
+      <input type="text" id="surl" placeholder="https://script.google.com/macros/s/.../exec">
+      <button class="bg" onclick="saveURL()">Salva</button>
     </div>
+    <div class="note">Incolla qui l'URL che finisce con /exec — viene salvato nel browser.</div>
   </div>
 </div>
 
 <div class="layout">
 
   <div class="panel">
-    <div class="phead">01 — Acquisizione immagine</div>
+    <div class="phead">01 — Immagine</div>
     <div class="pbody">
-      <div id="drop-zone"
-           onclick="document.getElementById('file-input').click()"
-           ondragover="event.preventDefault(); this.classList.add('over')"
+      <div id="dz" onclick="document.getElementById('fi').click()"
+           ondragover="event.preventDefault();this.classList.add('over')"
            ondragleave="this.classList.remove('over')"
-           ondrop="handleDrop(event)">
+           ondrop="drop(event)">
         <div class="ico">⬡</div>
-        <p>Clicca o trascina l'immagine<br><strong>JPG / PNG / WEBP</strong></p>
+        <p>Clicca o trascina<br><strong>JPG / PNG / WEBP</strong></p>
       </div>
-      <input type="file" id="file-input" accept="image/*" onchange="handleFile(this.files[0])">
+      <input type="file" id="fi" accept="image/*" onchange="loadFile(this.files[0])">
       <div class="brow">
-        <button class="bp" id="scan-btn" onclick="scanCard()" disabled>⬡ Analizza biglietto</button>
+        <button class="bp" id="btnScan" onclick="scan()" disabled>⬡ Analizza</button>
         <button class="bg" onclick="clearImg()">Pulisci</button>
       </div>
-      <div id="status"></div>
+      <div id="st"></div>
     </div>
   </div>
 
@@ -262,39 +114,37 @@ button { font-family: var(--mono); font-size: 0.77rem; letter-spacing: 0.05em; p
     <div class="phead">02 — Dati estratti</div>
     <div class="pbody">
       <div class="r2">
-        <div class="field"><label>Nome</label><input type="text" id="f-nome" placeholder="—"></div>
-        <div class="field"><label>Cognome</label><input type="text" id="f-cognome" placeholder="—"></div>
+        <div class="field"><label>Nome</label><input type="text" id="f0"></div>
+        <div class="field"><label>Cognome</label><input type="text" id="f1"></div>
       </div>
-      <div class="field"><label>Azienda</label><input type="text" id="f-azienda" placeholder="—"></div>
-      <div class="field"><label>Ruolo</label><input type="text" id="f-ruolo" placeholder="—"></div>
-      <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="—"></div>
+      <div class="field"><label>Azienda</label><input type="text" id="f2"></div>
+      <div class="field"><label>Ruolo</label><input type="text" id="f3"></div>
+      <div class="field"><label>Email</label><input type="text" id="f4"></div>
       <div class="r2">
-        <div class="field"><label>Telefono</label><input type="text" id="f-tel" placeholder="—"></div>
-        <div class="field"><label>Mobile</label><input type="text" id="f-mobile" placeholder="—"></div>
+        <div class="field"><label>Telefono</label><input type="text" id="f5"></div>
+        <div class="field"><label>Mobile</label><input type="text" id="f6"></div>
       </div>
-      <div class="field"><label>Sito web</label><input type="text" id="f-web" placeholder="—"></div>
-      <div class="field"><label>Indirizzo</label><textarea id="f-ind" placeholder="—"></textarea></div>
-      <div class="field"><label>Note</label><textarea id="f-note" placeholder="—"></textarea></div>
+      <div class="field"><label>Sito web</label><input type="text" id="f7"></div>
+      <div class="field"><label>Indirizzo</label><textarea id="f8"></textarea></div>
+      <div class="field"><label>Note</label><textarea id="f9"></textarea></div>
       <div class="brow">
-        <button class="bs" id="save-btn" onclick="saveContact()" disabled>✦ Salva su Sheets</button>
+        <button class="bs" id="btnSave" onclick="save()" disabled>✦ Salva su Sheets</button>
         <button class="bg" onclick="clearForm()">Cancella</button>
       </div>
     </div>
   </div>
 
-  <div class="panel" id="contacts-panel">
+  <div class="panel" id="cp">
     <div class="phead">
-      <span>03 — Rubrica condivisa (<span id="cnt">0</span> contatti)</span>
-      <button class="bg" style="padding:4px 10px; font-size:0.65rem;" onclick="loadContacts()">↺ Aggiorna</button>
+      <span>03 — Rubrica (<span id="cnt">0</span> contatti)</span>
+      <button class="bg" style="padding:4px 10px;font-size:0.65rem;" onclick="loadContacts()">↺ Aggiorna</button>
     </div>
     <div class="pbody">
-      <div id="clist"><div class="empty">Configura Script URL per caricare la rubrica</div></div>
-      <div style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
-        <div class="erow">
-          <button class="bg" onclick="exportCSV()">↓ CSV</button>
-          <button class="bg" onclick="exportVCF()">↓ VCF</button>
-          <button class="bg" onclick="exportJSON()">↓ JSON</button>
-        </div>
+      <div id="cl"><div class="empty">Inserisci lo Script URL per caricare la rubrica</div></div>
+      <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="bg" onclick="expCSV()">↓ CSV</button>
+        <button class="bg" onclick="expVCF()">↓ VCF</button>
+        <button class="bg" onclick="expJSON()">↓ JSON</button>
       </div>
     </div>
   </div>
@@ -302,255 +152,232 @@ button { font-family: var(--mono); font-size: 0.77rem; letter-spacing: 0.05em; p
 </div>
 
 <script>
-var img64 = null;
+var b64 = null;
 var contacts = [];
-var cfgOpen = true;
+var KEYS = ['nome','cognome','azienda','ruolo','email','telefono','mobile','web','indirizzo','note'];
 
-window.addEventListener('DOMContentLoaded', function() {
-  var url = localStorage.getItem('cs_script_url');
-  if (url) {
-    document.getElementById('script-url').value = url;
-    loadContacts();
-  }
-  refreshDots();
-});
+window.onload = function() {
+  var u = localStorage.getItem('cs_url');
+  if (u) { document.getElementById('surl').value = u; loadContacts(); }
+};
 
-function toggleCfg() {
-  cfgOpen = !cfgOpen;
-  document.getElementById('cfg-body').style.display = cfgOpen ? 'block' : 'none';
-  document.getElementById('cfg-lbl').textContent = cfgOpen ? '▾ configurazione' : '▸ configurazione';
-}
-
-function refreshDots() {
-  var hasUrl = !!localStorage.getItem('cs_script_url');
-  document.getElementById('d-url').className = 'sdot ' + (hasUrl ? 'ok' : 'warn');
-}
-
-function saveScriptUrl() {
-  var url = document.getElementById('script-url').value.trim();
-  if (!url.startsWith('https://script.google.com')) {
-    setStatus('error', 'URL non valido');
-    return;
-  }
-  localStorage.setItem('cs_script_url', url);
-  refreshDots();
-  setStatus('ok', 'Script URL salvato');
+function saveURL() {
+  var u = document.getElementById('surl').value.trim();
+  if (!u) { st('error','URL vuoto'); return; }
+  localStorage.setItem('cs_url', u);
+  st('ok','URL salvato');
   loadContacts();
 }
 
-function handleDrop(e) {
+function getURL() { return localStorage.getItem('cs_url'); }
+
+function drop(e) {
   e.preventDefault();
   e.currentTarget.classList.remove('over');
   var f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) handleFile(f);
+  if (f) loadFile(f);
 }
 
-function handleFile(f) {
+function loadFile(f) {
   if (!f) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    img64 = ev.target.result;
-    var zone = document.getElementById('drop-zone');
-    var el = zone.querySelector('img');
-    if (!el) { el = document.createElement('img'); zone.appendChild(el); }
-    el.src = img64;
-    document.getElementById('scan-btn').disabled = false;
-    setStatus('', 'Immagine caricata');
+  var r = new FileReader();
+  r.onload = function(e) {
+    b64 = e.target.result;
+    var dz = document.getElementById('dz');
+    var img = dz.querySelector('img');
+    if (!img) { img = document.createElement('img'); dz.appendChild(img); }
+    img.src = b64;
+    document.getElementById('btnScan').disabled = false;
+    st('','Immagine caricata');
   };
-  reader.readAsDataURL(f);
+  r.readAsDataURL(f);
 }
 
 function clearImg() {
-  img64 = null;
-  var zone = document.getElementById('drop-zone');
-  var el = zone.querySelector('img');
-  if (el) el.remove();
-  document.getElementById('file-input').value = '';
-  document.getElementById('scan-btn').disabled = true;
-  setStatus('', '');
+  b64 = null;
+  var dz = document.getElementById('dz');
+  var img = dz.querySelector('img');
+  if (img) img.remove();
+  document.getElementById('fi').value = '';
+  document.getElementById('btnScan').disabled = true;
+  st('','');
 }
 
-async function scanCard() {
-  var scriptUrl = localStorage.getItem('cs_script_url');
-  if (!scriptUrl) { setStatus('error', 'Configura lo Script URL prima'); return; }
-  if (!img64) { setStatus('error', 'Nessuna immagine caricata'); return; }
+async function scan() {
+  var url = getURL();
+  if (!url) { st('error','Inserisci e salva lo Script URL prima'); return; }
+  if (!b64)  { st('error','Nessuna immagine'); return; }
 
-  document.getElementById('scan-btn').disabled = true;
-  setStatus('loading', 'Analisi in corso...', true);
+  document.getElementById('btnScan').disabled = true;
+  st('loading','Analisi in corso...', true);
 
-  var parts = img64.split(',');
+  var parts = b64.split(',');
   var mime  = parts[0].match(/:(.*?);/)[1];
-  var b64   = parts[1];
+  var data  = parts[1];
 
   try {
-    var res = await fetch(scriptUrl, {
+    var res = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ action: 'ocr', imageBase64: b64, mimeType: mime })
+      body: JSON.stringify({ action: 'ocr', imageBase64: data, mimeType: mime })
     });
 
-    var json = await res.json();
+    var text = await res.text();
+    var json;
+    try { json = JSON.parse(text); }
+    catch(e) { throw new Error('Risposta non valida: ' + text.substring(0,100)); }
 
     if (json.error) throw new Error(json.error);
-    if (!json.ok)   throw new Error('Risposta non valida dallo script');
+    if (!json.ok || !json.data) throw new Error('Dati mancanti nella risposta');
 
     fillForm(json.data);
-    setStatus('ok', 'Dati estratti — verifica e salva');
-    document.getElementById('save-btn').disabled = false;
+    st('ok','Dati estratti — verifica e salva');
+    document.getElementById('btnSave').disabled = false;
 
   } catch(e) {
-    setStatus('error', 'Errore: ' + e.message);
+    st('error', e.message);
   } finally {
-    document.getElementById('scan-btn').disabled = false;
+    document.getElementById('btnScan').disabled = false;
   }
 }
 
 function fillForm(d) {
-  var map = {nome:'f-nome', cognome:'f-cognome', azienda:'f-azienda', ruolo:'f-ruolo',
-             email:'f-email', telefono:'f-tel', mobile:'f-mobile', web:'f-web',
-             indirizzo:'f-ind', note:'f-note'};
-  for (var k in map) {
-    var el = document.getElementById(map[k]);
+  var ids = ['f0','f1','f2','f3','f4','f5','f6','f7','f8','f9'];
+  KEYS.forEach(function(k, i) {
+    var el = document.getElementById(ids[i]);
     el.value = d[k] || '';
-    el.classList.toggle('filled', !!d[k]);
-  }
+    el.classList.toggle('ok', !!d[k]);
+  });
 }
 
 function clearForm() {
-  fillForm({});
-  document.getElementById('save-btn').disabled = true;
+  var ids = ['f0','f1','f2','f3','f4','f5','f6','f7','f8','f9'];
+  ids.forEach(function(id) {
+    var el = document.getElementById(id);
+    el.value = '';
+    el.classList.remove('ok');
+  });
+  document.getElementById('btnSave').disabled = true;
 }
 
-async function saveContact() {
-  var scriptUrl = localStorage.getItem('cs_script_url');
-  if (!scriptUrl) { setStatus('error', 'Script URL non configurato'); return; }
+async function save() {
+  var url = getURL();
+  if (!url) { st('error','Script URL mancante'); return; }
 
-  var contact = {
-    timestamp: new Date().toLocaleString('it-IT'),
-    nome:      document.getElementById('f-nome').value.trim(),
-    cognome:   document.getElementById('f-cognome').value.trim(),
-    azienda:   document.getElementById('f-azienda').value.trim(),
-    ruolo:     document.getElementById('f-ruolo').value.trim(),
-    email:     document.getElementById('f-email').value.trim(),
-    telefono:  document.getElementById('f-tel').value.trim(),
-    mobile:    document.getElementById('f-mobile').value.trim(),
-    web:       document.getElementById('f-web').value.trim(),
-    indirizzo: document.getElementById('f-ind').value.trim(),
-    note:      document.getElementById('f-note').value.trim()
-  };
+  var ids = ['f0','f1','f2','f3','f4','f5','f6','f7','f8','f9'];
+  var contact = { timestamp: new Date().toLocaleString('it-IT') };
+  KEYS.forEach(function(k, i) {
+    contact[k] = document.getElementById(ids[i]).value.trim();
+  });
 
-  document.getElementById('save-btn').disabled = true;
-  setStatus('loading', 'Salvataggio su Google Sheets...', true);
+  document.getElementById('btnSave').disabled = true;
+  st('loading','Salvataggio...', true);
 
   try {
-    var res = await fetch(scriptUrl, {
+    var res = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(contact)
     });
-    var json = await res.json();
+    var text = await res.text();
+    var json;
+    try { json = JSON.parse(text); }
+    catch(e) { throw new Error('Risposta non valida'); }
+
     if (!json.ok) throw new Error('Errore dal server');
-    setStatus('ok', '"' + contact.nome + ' ' + contact.cognome + '" salvato');
+
+    st('ok', '"' + contact.nome + ' ' + contact.cognome + '" salvato');
     clearForm();
     clearImg();
     loadContacts();
   } catch(e) {
-    setStatus('error', 'Errore salvataggio: ' + e.message);
-    document.getElementById('save-btn').disabled = false;
+    st('error','Errore: ' + e.message);
+    document.getElementById('btnSave').disabled = false;
   }
 }
 
 async function loadContacts() {
-  var scriptUrl = localStorage.getItem('cs_script_url');
-  if (!scriptUrl) return;
-  document.getElementById('clist').innerHTML = '<div class="empty">Caricamento...</div>';
+  var url = getURL();
+  if (!url) return;
+  document.getElementById('cl').innerHTML = '<div class="empty">Caricamento...</div>';
   try {
-    var res  = await fetch(scriptUrl);
-    var json = await res.json();
-    contacts = json.rows || [];
-    renderContacts();
+    var res  = await fetch(url);
+    var text = await res.text();
+    var json;
+    try { json = JSON.parse(text); }
+    catch(e) { throw new Error('Risposta non valida: ' + text.substring(0,80)); }
+    contacts = json.rows || json.righe || [];
+    render();
   } catch(e) {
-    document.getElementById('clist').innerHTML =
-      '<div class="empty" style="color:var(--danger)">Errore: ' + e.message + '</div>';
+    document.getElementById('cl').innerHTML = '<div class="empty" style="color:var(--danger)">Errore: ' + e.message + '</div>';
   }
 }
 
-function renderContacts() {
-  var list = document.getElementById('clist');
+function render() {
+  var el = document.getElementById('cl');
   document.getElementById('cnt').textContent = contacts.length;
-  if (!contacts.length) {
-    list.innerHTML = '<div class="empty">Nessun contatto nel foglio</div>';
-    return;
-  }
-  list.innerHTML = contacts.slice().reverse().map(function(c) {
+  if (!contacts.length) { el.innerHTML = '<div class="empty">Nessun contatto</div>'; return; }
+  el.innerHTML = contacts.slice().reverse().map(function(c) {
     return '<div class="cc">' +
-      '<div class="dt">' + (c.data || '') + '</div>' +
+      '<div class="dt">' + (c.data||'') + '</div>' +
       '<div class="cn">' + (c.nome||'') + ' ' + (c.cognome||'') + '</div>' +
       '<div class="co">' + (c.azienda||'—') + '</div>' +
       '<div class="cd">' +
-        (c.ruolo     ? '<span>📋 ' + c.ruolo + '</span>' : '') +
-        (c.email     ? '<span>✉ '  + c.email + '</span>' : '') +
-        (c.telefono  ? '<span>☎ '  + c.telefono + '</span>' : '') +
-        (c.mobile    ? '<span>📱 ' + c.mobile + '</span>' : '') +
-        (c.web       ? '<span>🌐 ' + c.web + '</span>' : '') +
-        (c.indirizzo ? '<span>📍 ' + String(c.indirizzo).replace(/\n/g,' ') + '</span>' : '') +
+        (c.ruolo    ? '<span>📋 '+c.ruolo+'</span>' : '') +
+        (c.email    ? '<span>✉ '+c.email+'</span>' : '') +
+        (c.telefono ? '<span>☎ '+c.telefono+'</span>' : '') +
+        (c.mobile   ? '<span>📱 '+c.mobile+'</span>' : '') +
+        (c.web      ? '<span>🌐 '+c.web+'</span>' : '') +
+        (c.indirizzo? '<span>📍 '+String(c.indirizzo).replace(/\n/g,' ')+'</span>' : '') +
       '</div></div>';
   }).join('');
 }
 
-function setStatus(type, msg, spin) {
-  var el = document.getElementById('status');
+function st(type, msg, spin) {
+  var el = document.getElementById('st');
   el.className = type;
-  if (spin) {
-    el.innerHTML = '<div class="spin"></div>' + msg;
-  } else {
-    var col = type==='ok' ? 'var(--success)' : type==='error' ? 'var(--danger)' : type==='loading' ? 'var(--accent2)' : 'var(--dim)';
-    el.innerHTML = '<div class="dot" style="background:' + col + '"></div>' + msg;
-  }
+  if (spin) { el.innerHTML = '<div class="spin"></div>' + msg; return; }
+  var col = type==='ok'?'var(--success)':type==='error'?'var(--danger)':type==='loading'?'var(--accent2)':'var(--dim)';
+  el.innerHTML = msg ? '<div class="dot" style="background:'+col+'"></div>'+msg : '';
 }
 
-function dlFile(content, name, mime) {
-  var blob = new Blob([content], {type: mime});
+function dl(content, name, mime) {
   var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = name;
-  a.click();
-  URL.revokeObjectURL(a.href);
+  a.href = URL.createObjectURL(new Blob([content],{type:mime}));
+  a.download = name; a.click();
 }
 
-function exportCSV() {
+function expCSV() {
   if (!contacts.length) return;
   var h = ['Data','Nome','Cognome','Azienda','Ruolo','Email','Telefono','Mobile','Web','Indirizzo','Note'];
   var rows = contacts.map(function(c) {
-    return [c.data,c.nome,c.cognome,c.azienda,c.ruolo,c.email,
-            c.telefono,c.mobile,c.web,
-            String(c.indirizzo||'').replace(/\n/g,' '),c.note]
-      .map(function(v){ return '"' + String(v||'').replace(/"/g,'""') + '"'; }).join(';');
+    return ['data','nome','cognome','azienda','ruolo','email','telefono','mobile','web','indirizzo','note']
+      .map(function(k){ return '"'+String(c[k]||'').replace(/"/g,'""')+'"'; }).join(';');
   });
-  dlFile([h.join(';')].concat(rows).join('\r\n'), 'contatti.csv', 'text/csv;charset=utf-8');
+  dl([h.join(';')].concat(rows).join('\r\n'), 'contatti.csv', 'text/csv;charset=utf-8');
 }
 
-function exportVCF() {
+function expVCF() {
   if (!contacts.length) return;
   var out = contacts.map(function(c) {
     var l = ['BEGIN:VCARD','VERSION:3.0',
-      'N:' + (c.cognome||'') + ';' + (c.nome||'') + ';;;',
-      'FN:' + (c.nome||'') + ' ' + (c.cognome||'')];
-    if (c.azienda)   l.push('ORG:' + c.azienda);
-    if (c.ruolo)     l.push('TITLE:' + c.ruolo);
-    if (c.email)     l.push('EMAIL;TYPE=WORK:' + c.email);
-    if (c.telefono)  l.push('TEL;TYPE=WORK,VOICE:' + c.telefono);
-    if (c.mobile)    l.push('TEL;TYPE=CELL:' + c.mobile);
-    if (c.web)       l.push('URL:' + c.web);
-    if (c.indirizzo) l.push('ADR;TYPE=WORK:;;' + String(c.indirizzo).replace(/\n/g,', ') + ';;;;');
-    if (c.note)      l.push('NOTE:' + c.note);
+      'N:'+(c.cognome||'')+';'+(c.nome||'')+';;;',
+      'FN:'+(c.nome||'')+' '+(c.cognome||'')];
+    if(c.azienda)   l.push('ORG:'+c.azienda);
+    if(c.ruolo)     l.push('TITLE:'+c.ruolo);
+    if(c.email)     l.push('EMAIL;TYPE=WORK:'+c.email);
+    if(c.telefono)  l.push('TEL;TYPE=WORK,VOICE:'+c.telefono);
+    if(c.mobile)    l.push('TEL;TYPE=CELL:'+c.mobile);
+    if(c.web)       l.push('URL:'+c.web);
+    if(c.indirizzo) l.push('ADR;TYPE=WORK:;;'+String(c.indirizzo).replace(/\n/g,', ')+';;;;');
+    if(c.note)      l.push('NOTE:'+c.note);
     l.push('END:VCARD');
     return l.join('\r\n');
   }).join('\r\n\r\n');
-  dlFile(out, 'contatti.vcf', 'text/vcard');
+  dl(out, 'contatti.vcf', 'text/vcard');
 }
 
-function exportJSON() {
+function expJSON() {
   if (!contacts.length) return;
-  dlFile(JSON.stringify(contacts, null, 2), 'contatti.json', 'application/json');
+  dl(JSON.stringify(contacts,null,2), 'contatti.json', 'application/json');
 }
 </script>
 </body>
